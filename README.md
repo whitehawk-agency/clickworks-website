@@ -57,8 +57,12 @@ palette there and it propagates across the page.
   hairline borders and `paper-soft` for recessed surfaces.
 - **Accent** — a single blue (`accent`) reserved for the primary "Get Started"
   CTA, so it stays the loudest thing on the page.
-- **Type** — Poppins for display/wordmark, Inter for body, both via
-  `next/font`.
+- **Type** — SF Pro, via the system font stack (`-apple-system`,
+  `BlinkMacSystemFont`, `SF Pro Text`/`Display`). Apple's licence does not
+  permit serving the font files from a website, so this is the only legitimate
+  way to use it: Apple devices render real SF Pro, and anything else falls
+  through to Inter (loaded via `next/font`), which is metrically close enough
+  to keep the layout identical. Headings and body share one stack.
 
 ## Notes for whoever picks this up
 

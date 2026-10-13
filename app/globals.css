@@ -13,10 +13,17 @@
   --color-accent: #1d7afc;
   --color-accent-strong: #0a63e0;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--font-display), var(--font-inter), ui-sans-serif,
-    system-ui, sans-serif;
+  /*
+   * SF Pro. Apple's licence does not allow serving the font files from a
+   * website, so it is used the only legitimate way: the system stack, which
+   * resolves to real SF Pro on Apple devices (and on any machine where the
+   * designer has installed it). Everywhere else falls through to Inter, which
+   * is metrically close, so the page keeps the same proportions off-Apple.
+   */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "SF Pro Display", "SF Pro", var(--font-inter), "Segoe UI", Roboto,
+    ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sans);
 
   /* Soft UI shadows for cards */
   --shadow-soft: 0 1px 2px rgba(9, 9, 11, 0.04),
