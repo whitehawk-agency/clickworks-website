@@ -1,13 +1,14 @@
 import { Container } from "@/components/Container";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { PeopleRail } from "@/components/PeopleRail";
+import { GradientBall } from "@/components/GradientBall";
 
 export function Services() {
   return (
-    <section id="features" className="scroll-mt-20 py-16 sm:py-24">
+    <section id="features" className="scroll-mt-20 pb-16 pt-6 sm:pb-24 sm:pt-10">
       <Container>
-        {/* Value proposition */}
-        <p className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.12] tracking-tight text-ink sm:text-[2.5rem]">
+        {/* Value proposition — sized to break onto two lines */}
+        <p className="mx-auto max-w-4xl text-balance text-center text-2xl font-semibold leading-snug tracking-tight text-ink sm:text-3xl">
           Imagine the power of 1,000 marketers in your pocket, always analyzing
           your strategy. Ready to diagnose and prescribe.
         </p>
@@ -27,16 +28,13 @@ export function Services() {
         <PeopleRail />
       </div>
 
-      <Container className="mt-8 flex justify-center">
+      <Container className="mt-10 flex justify-center">
         <a
-          href="#plans"
-          className="inline-flex items-center gap-2 rounded-full border border-line bg-paper px-4 py-1.5 text-sm font-medium text-ink shadow-soft transition-colors hover:border-ink"
+          href="#community"
+          className="inline-flex items-center gap-2.5 rounded-full border border-line bg-paper px-6 py-3.5 text-base font-semibold text-ink shadow-soft transition-colors hover:border-ink"
         >
-          <span
-            aria-hidden="true"
-            className="size-2.5 rounded-full bg-linear-to-br from-fuchsia-400 to-indigo-500"
-          />
           Meet Core Team
+          <GradientBall className="size-5" />
         </a>
       </Container>
     </section>

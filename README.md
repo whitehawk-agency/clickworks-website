@@ -27,9 +27,8 @@ Sections render top-to-bottom from `app/page.tsx`:
 | "Our work, Real Results." (auto-playing) | `components/OurWork.tsx` | `#work` |
 | Value prop, service tiles, team rail | `components/Services.tsx` | `#features`, `#services` |
 | Team rail (auto-playing) | `components/PeopleRail.tsx` | — |
-| "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#plans` |
+| "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#community` |
 | Brand marks lucide lacks (TikTok, X) | `components/BrandIcons.tsx` | — |
-| Contact form | `components/ContactForm.tsx` | `#contact` |
 | Footer | `components/Footer.tsx` | — |
 
 Shared pieces live alongside them: `Container` (page gutter and max width),
@@ -43,9 +42,15 @@ Shared pieces live alongside them: `Container` (page gutter and max width),
 and wraps at the end, and it holds still while someone is hovering, touching or
 tabbing through it, while the tab is backgrounded, and while it is scrolled out
 of view. It never starts for a visitor who prefers reduced motion, and it
-always renders a pause control — auto-moving content needs one, so the control
-stays even where `arrows={false}` hides the prev/next buttons. The projects and
-team rails auto-play with the arrows hidden; the testimonials are a static grid.
+holds still while someone hovers, touches or tabs through it, while the tab is
+backgrounded, and while it is scrolled out of view. It never starts for a
+visitor who prefers reduced motion. The projects and team rails auto-play with
+`arrows={false}`; the testimonials are a static grid.
+
+There is deliberately no pause button. WCAG 2.2.2 asks for a visible way to
+stop content that moves on its own, so if that matters for this site, re-add
+one — the reduced-motion opt-out and the hover/focus hold are the mitigations
+currently standing in for it.
 
 ## Design tokens
 
@@ -90,8 +95,12 @@ palette there and it propagates across the page.
   `src` and `poster`; fill them from a manual pull, or from a route handler
   that caches the latest clips from each platform's API. Until then the cards
   render as posters and do not play.
-- **The contact form has no backend.** `handleSubmit` currently just flips to
-  the success state — point it at a route handler or form service.
+- **There is no contact form.** It was removed, so every call to action
+  ("Get Started", "Sign Up", "Explore all stories", the footer links) points at
+  `CONTACT_HREF` in `lib/links.ts`, currently a placeholder. Set it once to a
+  contact page, booking link or `mailto:` and they all follow.
+- **Footer social links** point at the same placeholder; swap in the real
+  profile URLs in `SOCIALS`.
 - **Team portraits** are initials on a gradient in `PeopleRail`; drop in
   `next/image` once you have the photography.
 

@@ -5,6 +5,8 @@ import { Facebook, Instagram, Linkedin, Play, Youtube } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/Container";
 import { Wordmark } from "@/components/Wordmark";
+import { GradientBall } from "@/components/GradientBall";
+import { CONTACT_HREF } from "@/lib/links";
 
 const PLATFORMS = {
   instagram: { icon: Instagram, name: "Instagram" },
@@ -54,7 +56,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 export function Testimonials() {
   return (
-    <section id="plans" className="scroll-mt-20 bg-paper-soft py-16 sm:py-24">
+    <section id="community" className="scroll-mt-20 bg-paper-soft py-16 sm:py-24">
       <Container>
         <h2 className="flex flex-wrap items-center justify-center gap-x-3 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
           Life with <Wordmark className="h-[0.8em]" />
@@ -68,14 +70,11 @@ export function Testimonials() {
 
         <div className="mt-10 flex justify-center sm:mt-12">
           <a
-            href="#contact"
+            href={CONTACT_HREF}
             className="inline-flex items-center gap-2.5 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5"
           >
             Explore all stories
-            <span
-              aria-hidden="true"
-              className="size-3.5 rounded-full bg-linear-to-br from-fuchsia-400 to-indigo-500"
-            />
+            <GradientBall className="size-4" />
           </a>
         </div>
       </Container>

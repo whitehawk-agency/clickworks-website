@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { clsx } from "@/lib/clsx";
 
 /**
@@ -27,16 +27,15 @@ export function Carousel({
   className?: string;
   autoplay?: boolean;
   interval?: number;
-  /** Prev/next buttons. The pause control stays regardless while autoplaying. */
+  /** Prev/next buttons. */
   arrows?: boolean;
 }) {
   const railRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
-
-  // `playing` drives the button; `heldRef` is the transient hover/focus hold.
-  const [playing, setPlaying] = useState(autoplay);
   const [canAutoplay, setCanAutoplay] = useState(false);
+
+  // Transient hold while someone is hovering, touching or tabbing the rail.
   const heldRef = useRef(false);
 
   const sync = useCallback(() => {
@@ -69,17 +68,14 @@ export function Carousel({
   useEffect(() => {
     if (!autoplay || typeof window === "undefined") return;
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const apply = () => {
-      setCanAutoplay(!query.matches);
-      setPlaying(!query.matches);
-    };
+    const apply = () => setCanAutoplay(!query.matches);
     apply();
     query.addEventListener("change", apply);
     return () => query.removeEventListener("change", apply);
   }, [autoplay]);
 
   useEffect(() => {
-    if (!canAutoplay || !playing) return;
+    if (!canAutoplay) return;
     const rail = railRef.current;
     if (!rail) return;
 
@@ -106,7 +102,7 @@ export function Carousel({
       window.clearInterval(timer);
       observer.disconnect();
     };
-  }, [canAutoplay, playing, interval, step]);
+  }, [canAutoplay, interval, step]);
 
   const hold = () => {
     heldRef.current = true;
@@ -142,47 +138,20 @@ export function Carousel({
         {children}
       </div>
 
-      {(arrows || canAutoplay) && (
+      {arrows && (
         <div className="mt-6 flex items-center justify-center gap-3">
-          {arrows && (
-            <RailButton
-              icon={ChevronLeft}
-              disabled={atStart}
-              onClick={() => step(-1)}
-              label={`Scroll ${label} backward`}
-            />
-          )}
-
-          {/*
-            WCAG asks for an explicit stop for anything that moves on its own,
-            so this stays even where the arrows are hidden. It is kept quiet:
-            small, low-contrast, and it comes forward on hover or focus.
-          */}
-          {canAutoplay && (
-            <button
-              type="button"
-              onClick={() => setPlaying((value) => !value)}
-              aria-label={playing ? `Pause ${label}` : `Play ${label}`}
-              className={clsx(
-                "inline-flex items-center justify-center rounded-full text-ink-muted/50 transition-colors",
-                "hover:text-ink focus-visible:text-ink",
-                arrows
-                  ? "size-11 border border-line bg-paper shadow-soft hover:bg-ink hover:text-white"
-                  : "size-8",
-              )}
-            >
-              {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
-            </button>
-          )}
-
-          {arrows && (
-            <RailButton
-              icon={ChevronRight}
-              disabled={atEnd}
-              onClick={() => step(1)}
-              label={`Scroll ${label} forward`}
-            />
-          )}
+          <RailButton
+            icon={ChevronLeft}
+            disabled={atStart}
+            onClick={() => step(-1)}
+            label={`Scroll ${label} backward`}
+          />
+          <RailButton
+            icon={ChevronRight}
+            disabled={atEnd}
+            onClick={() => step(1)}
+            label={`Scroll ${label} forward`}
+          />
         </div>
       )}
     </div>

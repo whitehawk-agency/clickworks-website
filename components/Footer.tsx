@@ -1,5 +1,6 @@
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import { Container } from "@/components/Container";
+import { CONTACT_HREF } from "@/lib/links";
 import { Wordmark } from "@/components/Wordmark";
 import { TikTokIcon, XIcon } from "@/components/BrandIcons";
 
@@ -13,16 +14,16 @@ const COLUMNS = [
     heading: "Company",
     links: [
       { label: "About", href: "#about" },
-      { label: "Press", href: "#contact" },
-      { label: "Careers", href: "#contact" },
-      { label: "Core Team", href: "#plans" },
+      { label: "Press", href: CONTACT_HREF },
+      { label: "Careers", href: CONTACT_HREF },
+      { label: "Core Team", href: "#community" },
     ],
     // Second group stacked under the first, as in the reference layout.
     subHeading: "Terms & Policies",
     subLinks: [
-      { label: "Terms of Service", href: "#contact" },
-      { label: "Privacy Policy", href: "#contact" },
-      { label: "Cookie Policy", href: "#contact" },
+      { label: "Terms of Service", href: CONTACT_HREF },
+      { label: "Privacy Policy", href: CONTACT_HREF },
+      { label: "Cookie Policy", href: CONTACT_HREF },
     ],
   },
   {
@@ -37,26 +38,27 @@ const COLUMNS = [
   {
     heading: "For Clients",
     links: [
-      { label: "Get Started", href: "#contact" },
-      { label: "Plans", href: "#plans" },
-      { label: "Support", href: "#contact" },
+      { label: "Get Started", href: CONTACT_HREF },
+      { label: "Community", href: "#community" },
+      { label: "Support", href: CONTACT_HREF },
     ],
   },
   {
     heading: "Learn",
     links: [
-      { label: "News", href: "#contact" },
+      { label: "News", href: CONTACT_HREF },
       { label: "Our Work", href: "#work" },
     ],
   },
 ];
 
+// Point these at the real profile URLs.
 const SOCIALS = [
-  { label: "Instagram", href: "#contact", Icon: Instagram },
-  { label: "TikTok", href: "#contact", Icon: TikTokIcon },
-  { label: "X", href: "#contact", Icon: XIcon },
-  { label: "LinkedIn", href: "#contact", Icon: Linkedin },
-  { label: "YouTube", href: "#contact", Icon: Youtube },
+  { label: "Instagram", href: CONTACT_HREF, Icon: Instagram },
+  { label: "TikTok", href: CONTACT_HREF, Icon: TikTokIcon },
+  { label: "X", href: CONTACT_HREF, Icon: XIcon },
+  { label: "LinkedIn", href: CONTACT_HREF, Icon: Linkedin },
+  { label: "YouTube", href: CONTACT_HREF, Icon: Youtube },
 ];
 
 export function Footer() {
