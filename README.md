@@ -74,7 +74,10 @@ palette there and it propagates across the page.
   download covers every weight — smaller than shipping the static Display
   cuts. `globals.css` pins `font-variation-settings: "opsz" 32`, the top of
   the optical-size range, which *is* the Display cut. Swap that for
-  `font-optical-sizing: auto` to let the browser choose per size instead.
+  `font-optical-sizing: auto` to let the browser choose per size instead. The
+  fallbacks name no system UI font on purpose: `-apple-system`, `system-ui`
+  and `ui-sans-serif` all resolve to SF on Apple devices, so naming any of
+  them would put SF back on the page if the file failed to load.
 - **Content is placeholder.** Project names, team members and testimonial
   quotes are stand-ins; swap the `PROJECTS`, `TEAM` and `TESTIMONIALS` arrays
   for real data.

@@ -16,10 +16,11 @@
   /*
    * Inter Display, self-hosted as one variable file. The Display cut comes
    * from pinning the optical-size axis below, so no separate family is
-   * needed. The rest of the stack only matters while the file is loading.
+   * needed. The fallbacks deliberately name no system UI font: -apple-system,
+   * system-ui and ui-sans-serif all resolve to SF on Apple devices, so naming
+   * them would put SF back on the page if the file ever failed to load.
    */
-  --font-sans: var(--font-inter-display), -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter-display), "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-sans);
 
   /* Soft UI shadows for cards */

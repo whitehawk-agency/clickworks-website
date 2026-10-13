@@ -71,10 +71,10 @@ export function Testimonials() {
         <div className="mt-10 flex justify-center sm:mt-12">
           <a
             href={CONTACT_HREF}
-            className="inline-flex items-center gap-2.5 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5"
+            className="inline-flex items-center gap-4 rounded-full bg-black px-4 py-3 text-lg font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5"
           >
             Explore all stories
-            <GradientBall className="size-5" />
+            <GradientBall className="size-6" />
           </a>
         </div>
       </Container>

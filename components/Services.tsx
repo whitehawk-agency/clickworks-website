@@ -31,10 +31,10 @@ export function Services() {
       <Container className="mt-10 flex justify-center">
         <a
           href="#community"
-          className="inline-flex items-center gap-3 rounded-full border border-line bg-paper px-7 py-4 text-base font-medium text-ink shadow-soft transition-colors hover:border-ink"
+          className="inline-flex items-center gap-[18px] rounded-full border border-[#f2f2f2] bg-paper px-10 py-[13px] text-lg font-normal text-[#545454] shadow-soft transition-colors hover:border-line sm:px-[104px] sm:text-xl"
         >
           Meet Core Team
-          <ArrowUpRight className="size-5 shrink-0" strokeWidth={1.75} />
+          <ArrowUpRight className="size-7 shrink-0" strokeWidth={2} />
         </a>
       </Container>
     </section>
