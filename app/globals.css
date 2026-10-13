@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  /* Core neutrals — high-contrast black / white foundation */
+  --color-ink: #09090b;
+  --color-ink-soft: #141417;
+  --color-ink-muted: #52525b;
+  --color-paper: #ffffff;
+  --color-paper-soft: #f7f7f8;
+  --color-line: #e8e8ec;
+
+  /* Single accent used for the primary CTA */
+  --color-accent: #1d7afc;
+  --color-accent-strong: #0a63e0;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* Soft UI shadows for cards */
+  --shadow-soft: 0 1px 2px rgba(9, 9, 11, 0.04),
+    0 8px 24px -12px rgba(9, 9, 11, 0.12);
+  --shadow-soft-lg: 0 1px 2px rgba(9, 9, 11, 0.04),
+    0 24px 48px -20px rgba(9, 9, 11, 0.18);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* Visible, consistent focus ring for keyboard users */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  /* Horizontal carousel rails: snap, no visible scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.045em;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Service-tile motion. Each tile animates a small motif so the three cards
+   read as alive rather than static blocks. Honours prefers-reduced-motion via
+   the base-layer reset above.
+--------------------------------------------------------------------------- */
+@theme {
+  --animate-rise: rise 2.8s var(--ease-out-soft) infinite;
+  --animate-sweep: sweep 3.2s var(--ease-out-soft) infinite;
+  --animate-orbit: orbit 9s linear infinite;
+  --animate-breathe: breathe 3.6s ease-in-out infinite;
+}
+
+@keyframes rise {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  60%,
+  100% {
+    transform: translateX(240%);
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
