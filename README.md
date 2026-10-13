@@ -68,15 +68,13 @@ palette there and it propagates across the page.
   are interchangeable; `<Wordmark onDark />` picks the white one. The mark is
   sized in `em` and sits on the baseline, so it scales with whatever type
   surrounds it and works inline mid-sentence.
-- **Type** — SF Pro, via the system font stack (`-apple-system`,
-  `BlinkMacSystemFont`, `SF Pro Text`/`Display`). Apple's licence does not
-  permit serving the font files from a website, so this is the only legitimate
-  way to use it: Apple devices render real SF Pro, and anything else falls
-  through to Inter (loaded via `next/font`), which is metrically close enough
-  to keep the layout identical. Headings and body share one stack.
-
-## Notes for whoever picks this up
-
+- **Type** — Inter, self-hosted from `app/fonts/InterVariable.woff2` via
+  `next/font/local` (SIL OFL; licence alongside it). It is one variable file
+  carrying both a weight axis and an optical-size axis, so a single 345KB
+  download covers every weight — smaller than shipping the static Display
+  cuts. `globals.css` pins `font-variation-settings: "opsz" 32`, the top of
+  the optical-size range, which *is* the Display cut. Swap that for
+  `font-optical-sizing: auto` to let the browser choose per size instead.
 - **Content is placeholder.** Project names, team members and testimonial
   quotes are stand-ins; swap the `PROJECTS`, `TEAM` and `TESTIMONIALS` arrays
   for real data.

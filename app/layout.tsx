@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+/**
+ * Inter, self-hosted as a single variable file (SIL OFL — see
+ * fonts/Inter-LICENSE.txt). It carries both a weight axis and an optical-size
+ * axis, and globals.css pins `opsz` to 32, which is the Display cut. One
+ * 345KB file therefore covers every weight the page uses and is smaller than
+ * shipping the static Display weights separately.
+ */
+const interDisplay = localFont({
+  src: "./fonts/InterVariable.woff2",
+  variable: "--font-inter-display",
+  weight: "100 900",
   display: "swap",
 });
 
@@ -28,7 +36,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={interDisplay.variable}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   );

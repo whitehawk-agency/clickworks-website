@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container";
 import { ServiceTiles } from "@/components/ServiceTiles";
 import { PeopleRail } from "@/components/PeopleRail";
-import { GradientBall } from "@/components/GradientBall";
+import { ArrowUpRight } from "lucide-react";
 
 export function Services() {
   return (
@@ -31,10 +31,10 @@ export function Services() {
       <Container className="mt-10 flex justify-center">
         <a
           href="#community"
-          className="inline-flex items-center gap-2.5 rounded-full border border-line bg-paper px-6 py-3.5 text-base font-semibold text-ink shadow-soft transition-colors hover:border-ink"
+          className="inline-flex items-center gap-3 rounded-full border border-line bg-paper px-7 py-4 text-base font-medium text-ink shadow-soft transition-colors hover:border-ink"
         >
           Meet Core Team
-          <GradientBall className="size-5" />
+          <ArrowUpRight className="size-5 shrink-0" strokeWidth={1.75} />
         </a>
       </Container>
     </section>

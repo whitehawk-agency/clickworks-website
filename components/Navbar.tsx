@@ -34,7 +34,7 @@ export function Navbar() {
       <Container>
         <nav
           aria-label="Main"
-          className="flex h-16 items-center justify-between gap-4"
+          className="relative flex h-16 items-center justify-center gap-4"
         >
           {/* Logo, links and the CTA all read as one group */}
           <div className="flex min-w-0 items-center gap-7">
@@ -69,7 +69,7 @@ export function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-paper-soft md:hidden"
+            className="absolute right-0 inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-paper-soft md:hidden"
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>

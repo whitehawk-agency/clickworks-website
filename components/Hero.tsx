@@ -12,11 +12,11 @@ export function Hero() {
         than `vh` keeps mobile browser chrome from cropping it.
       */}
       <div className="bg-ink">
-        <Container className="flex min-h-[calc(100svh-4rem)] flex-col items-center justify-start pb-16 pt-16 text-center sm:pt-24">
-          <p className="text-4xl font-semibold tracking-tight text-white sm:text-6xl">
+        <Container className="flex min-h-[calc(100svh-4rem)] flex-col items-center justify-start pb-16 pt-24 text-center sm:pt-32">
+          <p className="text-5xl font-semibold tracking-tight text-white sm:text-7xl">
             Introducing
           </p>
-          <h1 className="mt-2 text-5xl sm:mt-3 sm:text-7xl lg:text-8xl">
+          <h1 className="mt-3 text-6xl sm:mt-4 sm:text-8xl lg:text-9xl">
             <Wordmark onDark priority />
           </h1>
         </Container>

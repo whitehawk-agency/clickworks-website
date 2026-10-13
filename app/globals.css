@@ -14,15 +14,12 @@
   --color-accent-strong: #0a63e0;
 
   /*
-   * SF Pro. Apple's licence does not allow serving the font files from a
-   * website, so it is used the only legitimate way: the system stack, which
-   * resolves to real SF Pro on Apple devices (and on any machine where the
-   * designer has installed it). Everywhere else falls through to Inter, which
-   * is metrically close, so the page keeps the same proportions off-Apple.
+   * Inter Display, self-hosted as one variable file. The Display cut comes
+   * from pinning the optical-size axis below, so no separate family is
+   * needed. The rest of the stack only matters while the file is loading.
    */
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "SF Pro Display", "SF Pro", var(--font-inter), "Segoe UI", Roboto,
-    ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter-display), -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-sans);
 
   /* Soft UI shadows for cards */
@@ -44,6 +41,12 @@
   body {
     background-color: var(--color-paper);
     color: var(--color-ink);
+    /*
+     * Pin the optical-size axis to the top of its range: that is the Display
+     * cut of Inter. Swap to `font-optical-sizing: auto` to let the browser
+     * pick per size instead (Display when large, Text when small).
+     */
+    font-variation-settings: "opsz" 32;
   }
 
   /* Visible, consistent focus ring for keyboard users */
@@ -79,11 +82,6 @@
     display: none;
   }
 
-  .wordmark {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.045em;
-  }
 }
 
 /* ---------------------------------------------------------------------------
