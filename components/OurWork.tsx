@@ -1,44 +1,49 @@
+import Image from "next/image";
 import { Container } from "@/components/Container";
 import { Carousel } from "@/components/Carousel";
-import { SketchArrow } from "@/components/SketchArrow";
+import { clsx } from "@/lib/clsx";
 
 type Project = {
   client: string;
-  discipline: string;
-  result: string;
+  /** Photo filling the card. Drop the file in /public and reference it here. */
+  photo?: string;
+  /** Client logo, white version, sat over the photo. */
+  logo?: string;
+  logoWidth?: number;
+  logoHeight?: number;
 };
 
+/**
+ * Replace each entry's `photo` and `logo` with the real assets. Until they
+ * land, the card renders a neutral slot and sets the client name in place of
+ * the logo, so the layout is already the final one.
+ */
 const PROJECTS: Project[] = [
-  { client: "Northwind Coffee", discipline: "Website", result: "+214% online orders" },
-  { client: "Halo Fitness", discipline: "Social Media", result: "48k new followers" },
-  { client: "Meridian Dental", discipline: "Branding", result: "3.1x booking rate" },
-  { client: "Fern & Oak", discipline: "Website", result: "+68% conversion" },
-  { client: "Studio Verve", discipline: "Branding", result: "Rebrand in 6 weeks" },
+  { client: "Northwind Coffee" },
+  { client: "Halo Fitness" },
+  { client: "Meridian Dental" },
+  { client: "Fern & Oak" },
+  { client: "Studio Verve" },
+  { client: "Harbour & Co" },
 ];
 
 export function OurWork() {
   return (
     <section id="work" className="scroll-mt-20 py-16 sm:py-24">
       <Container>
-        <h2 className="text-center font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
           Our work, Real Results.
         </h2>
       </Container>
 
-      <Carousel label="Projects" autoplay interval={4500} className="mt-10 sm:mt-14">
-        {/* Wireframe's labelled carousel affordance, kept as the second card */}
-        <ProjectCard project={PROJECTS[0]} />
-
-        <article className="flex w-[clamp(220px,62vw,280px)] shrink-0 snap-start flex-col items-center justify-center gap-4 rounded-3xl bg-ink p-8 text-center aspect-3/4">
-          <p className="font-display text-xl font-semibold leading-snug text-white sm:text-2xl">
-            Projects
-            <br />
-            Carousel
-          </p>
-          <SketchArrow className="w-28 text-white sm:w-32" />
-        </article>
-
-        {PROJECTS.slice(1).map((project) => (
+      <Carousel
+        label="Projects"
+        autoplay
+        interval={4500}
+        arrows={false}
+        className="mt-10 sm:mt-14"
+      >
+        {PROJECTS.map((project) => (
           <ProjectCard key={project.client} project={project} />
         ))}
       </Carousel>
@@ -48,20 +53,48 @@ export function OurWork() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group relative flex w-[clamp(220px,62vw,280px)] shrink-0 snap-start flex-col justify-end overflow-hidden rounded-3xl bg-ink p-6 aspect-3/4">
-      {/* Subtle wash so the type lifts off the black */}
+    <article className="relative aspect-7/10 w-[clamp(230px,66vw,300px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
+      {project.photo ? (
+        <Image
+          src={project.photo}
+          alt={`${project.client} project`}
+          fill
+          sizes="(max-width: 640px) 66vw, 300px"
+          className="object-cover"
+        />
+      ) : (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-linear-to-br from-ink-soft via-ink to-black"
+        />
+      )}
+
+      {/* Keeps a white logo legible over a bright photo */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-white/5 opacity-80"
+        className="absolute inset-x-0 top-0 h-2/5 bg-linear-to-b from-black/55 to-transparent"
       />
-      <div className="relative">
-        <p className="text-xs font-medium uppercase tracking-[0.18em] text-white/55">
-          {project.discipline}
-        </p>
-        <h3 className="mt-2 font-display text-xl font-semibold tracking-tight text-white">
-          {project.client}
-        </h3>
-        <p className="mt-1 text-sm text-white/70">{project.result}</p>
+
+      <div className="absolute inset-x-0 top-0 flex justify-center px-6 pt-7">
+        {project.logo ? (
+          <Image
+            src={project.logo}
+            alt={project.client}
+            width={project.logoWidth ?? 320}
+            height={project.logoHeight ?? 80}
+            sizes="200px"
+            className="h-9 w-auto object-contain sm:h-10"
+          />
+        ) : (
+          <span
+            className={clsx(
+              "text-center text-sm font-semibold uppercase leading-tight tracking-[0.22em] text-white",
+              "sm:text-base",
+            )}
+          >
+            {project.client}
+          </span>
+        )}
       </div>
     </article>
   );

@@ -28,6 +28,7 @@ Sections render top-to-bottom from `app/page.tsx`:
 | Value prop, service tiles, team rail | `components/Services.tsx` | `#features`, `#services` |
 | Team rail (auto-playing) | `components/PeopleRail.tsx` | — |
 | "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#plans` |
+| Brand marks lucide lacks (TikTok, X) | `components/BrandIcons.tsx` | — |
 | Contact form | `components/ContactForm.tsx` | `#contact` |
 | Footer | `components/Footer.tsx` | — |
 
@@ -42,9 +43,9 @@ Shared pieces live alongside them: `Container` (page gutter and max width),
 and wraps at the end, and it holds still while someone is hovering, touching or
 tabbing through it, while the tab is backgrounded, and while it is scrolled out
 of view. It never starts for a visitor who prefers reduced motion, and it
-always renders a pause control — auto-moving content needs one. The projects
-and team rails auto-play; the testimonial rail does not, since moving the rail
-would interrupt playback.
+always renders a pause control — auto-moving content needs one, so the control
+stays even where `arrows={false}` hides the prev/next buttons. The projects and
+team rails auto-play with the arrows hidden; the testimonials are a static grid.
 
 ## Design tokens
 
@@ -74,6 +75,14 @@ palette there and it propagates across the page.
 - **Content is placeholder.** Project names, team members and testimonial
   quotes are stand-ins; swap the `PROJECTS`, `TEAM` and `TESTIMONIALS` arrays
   for real data.
+- **Imagery is the main gap.** Three card types are built to carry a photo and
+  render a neutral slot until they get one: project cards (`photo` + a white
+  `logo` per client), team cards (`photo` headshot) and testimonial cards
+  (`poster`). Drop files in `/public` and reference them from each array —
+  the layout does not change when they land.
+- **The team rail shows the Clickworks mark on every card**, matching the
+  reference layout. If the rail ever mixes in people from other companies,
+  give `Person` a per-person logo and swap it in `PersonCard`.
 - **The video slot is empty.** `VideoShowcase` renders the "Insert Video"
   placeholder until you pass it a `src`, at which point it becomes a
   click-to-play player.
@@ -85,6 +94,9 @@ palette there and it propagates across the page.
   the success state — point it at a route handler or form service.
 - **Team portraits** are initials on a gradient in `PeopleRail`; drop in
   `next/image` once you have the photography.
+
+- **Footer location line.** `FOUNDED_IN` in `components/Footer.tsx` is empty,
+  so that line is hidden; set it to a city to show "Founded & built in …".
 
 ## Accessibility & motion
 

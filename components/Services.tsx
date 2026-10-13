@@ -7,7 +7,7 @@ export function Services() {
     <section id="features" className="scroll-mt-20 py-16 sm:py-24">
       <Container>
         {/* Value proposition */}
-        <p className="mx-auto max-w-2xl text-balance text-center text-lg leading-relaxed text-ink sm:text-xl">
+        <p className="mx-auto max-w-4xl text-balance text-center text-4xl font-bold leading-[1.12] tracking-tight text-ink sm:text-[2.5rem]">
           Imagine the power of 1,000 marketers in your pocket, always analyzing
           your strategy. Ready to diagnose and prescribe.
         </p>
@@ -18,7 +18,7 @@ export function Services() {
         </div>
 
         {/* Human proof, leading into the team */}
-        <p className="mx-auto mt-16 max-w-xl text-balance text-center text-base font-medium text-ink-muted sm:mt-20 sm:text-lg">
+        <p className="mx-auto mt-16 max-w-3xl text-balance text-center text-[2rem] font-bold leading-[1.12] tracking-tight text-ink sm:mt-20 sm:text-4xl">
           Real people providing world-class, evidence-based strategies.
         </p>
       </Container>

@@ -20,12 +20,15 @@ export function Carousel({
   className,
   autoplay = false,
   interval = 4000,
+  arrows = true,
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
   autoplay?: boolean;
   interval?: number;
+  /** Prev/next buttons. The pause control stays regardless while autoplaying. */
+  arrows?: boolean;
 }) {
   const railRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
@@ -139,30 +142,49 @@ export function Carousel({
         {children}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-3">
-        <RailButton
-          icon={ChevronLeft}
-          disabled={atStart}
-          onClick={() => step(-1)}
-          label={`Scroll ${label} backward`}
-        />
+      {(arrows || canAutoplay) && (
+        <div className="mt-6 flex items-center justify-center gap-3">
+          {arrows && (
+            <RailButton
+              icon={ChevronLeft}
+              disabled={atStart}
+              onClick={() => step(-1)}
+              label={`Scroll ${label} backward`}
+            />
+          )}
 
-        {/* WCAG asks for an explicit stop for anything that moves on its own. */}
-        {canAutoplay && (
-          <RailButton
-            icon={playing ? Pause : Play}
-            onClick={() => setPlaying((value) => !value)}
-            label={playing ? `Pause ${label}` : `Play ${label}`}
-          />
-        )}
+          {/*
+            WCAG asks for an explicit stop for anything that moves on its own,
+            so this stays even where the arrows are hidden. It is kept quiet:
+            small, low-contrast, and it comes forward on hover or focus.
+          */}
+          {canAutoplay && (
+            <button
+              type="button"
+              onClick={() => setPlaying((value) => !value)}
+              aria-label={playing ? `Pause ${label}` : `Play ${label}`}
+              className={clsx(
+                "inline-flex items-center justify-center rounded-full text-ink-muted/50 transition-colors",
+                "hover:text-ink focus-visible:text-ink",
+                arrows
+                  ? "size-11 border border-line bg-paper shadow-soft hover:bg-ink hover:text-white"
+                  : "size-8",
+              )}
+            >
+              {playing ? <Pause className="size-4" /> : <Play className="size-4" />}
+            </button>
+          )}
 
-        <RailButton
-          icon={ChevronRight}
-          disabled={atEnd}
-          onClick={() => step(1)}
-          label={`Scroll ${label} forward`}
-        />
-      </div>
+          {arrows && (
+            <RailButton
+              icon={ChevronRight}
+              disabled={atEnd}
+              onClick={() => step(1)}
+              label={`Scroll ${label} forward`}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 }

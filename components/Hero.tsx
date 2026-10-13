@@ -6,13 +6,13 @@ import { AppDownloadBadge } from "@/components/AppDownloadBadge";
 export function Hero() {
   return (
     <section id="top">
-      {/* Full-bleed black announcement block */}
+      {/* Full-bleed black announcement block, sitting high under the nav */}
       <div className="bg-ink">
-        <Container className="flex min-h-[48vh] flex-col items-center justify-center py-20 text-center sm:py-28">
-          <p className="font-display text-2xl font-semibold tracking-tight text-white sm:text-4xl">
+        <Container className="flex flex-col items-center justify-center pb-16 pt-10 text-center sm:pb-20 sm:pt-14">
+          <p className="text-3xl font-semibold tracking-tight text-white sm:text-5xl">
             Introducing
           </p>
-          <h1 className="mt-1 text-5xl sm:mt-2 sm:text-7xl lg:text-8xl">
+          <h1 className="mt-2 text-5xl sm:mt-3 sm:text-7xl lg:text-8xl">
             <Wordmark onDark priority />
           </h1>
         </Container>
@@ -20,12 +20,11 @@ export function Hero() {
 
       {/* Welcome + video + app download */}
       <Container className="scroll-mt-20 py-16 sm:py-24" id="about">
-        <h2 className="text-center text-2xl font-medium tracking-tight text-ink sm:text-3xl">
-          Welcome to{" "}
-          <Wordmark className="h-[0.8em]" />
+        <h2 className="flex flex-wrap items-center justify-center gap-x-4 text-center text-5xl font-semibold tracking-tight text-ink sm:text-6xl lg:text-7xl">
+          Welcome to <Wordmark className="h-[0.8em]" />
         </h2>
 
-        <div className="mx-auto mt-8 max-w-4xl sm:mt-10">
+        <div className="mx-auto mt-10 max-w-4xl sm:mt-14">
           <VideoShowcase />
         </div>
 
