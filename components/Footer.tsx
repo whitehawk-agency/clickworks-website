@@ -16,7 +16,7 @@ export function Footer() {
       <Container>
         <div className="flex flex-col items-center gap-8 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
           <a href="#top" className="text-2xl">
-            <Wordmark />
+            <Wordmark onDark alt="Clickworks home" sizes="150px" />
           </a>
 
           <nav aria-label="Footer">

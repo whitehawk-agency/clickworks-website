@@ -57,6 +57,11 @@ palette there and it propagates across the page.
   hairline borders and `paper-soft` for recessed surfaces.
 - **Accent** — a single blue (`accent`) reserved for the primary "Get Started"
   CTA, so it stays the loudest thing on the page.
+- **Logo** — `public/clickworks-black.png` (for light surfaces) and
+  `public/clickworks-white.png` (for dark). Same artwork, same crop, so the two
+  are interchangeable; `<Wordmark onDark />` picks the white one. The mark is
+  sized in `em` and sits on the baseline, so it scales with whatever type
+  surrounds it and works inline mid-sentence.
 - **Type** — SF Pro, via the system font stack (`-apple-system`,
   `BlinkMacSystemFont`, `SF Pro Text`/`Display`). Apple's licence does not
   permit serving the font files from a website, so this is the only legitimate

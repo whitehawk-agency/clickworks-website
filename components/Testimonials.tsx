@@ -66,7 +66,7 @@ export function Testimonials() {
     <section id="plans" className="scroll-mt-20 bg-paper-soft py-16 sm:py-24">
       <Container>
         <h2 className="text-center font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
-          Life with <Wordmark className="text-[1.05em]" />
+          Life with <Wordmark className="h-[0.8em]" />
         </h2>
         <p className="mx-auto mt-4 max-w-md text-balance text-center text-base text-ink-muted">
           Straight from our clients&rsquo; feeds.

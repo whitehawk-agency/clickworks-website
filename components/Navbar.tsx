@@ -35,9 +35,8 @@ export function Navbar() {
           aria-label="Main"
           className="flex h-16 items-center justify-between gap-4"
         >
-          <a href="#top" className="shrink-0 text-lg text-ink">
-            <Wordmark />
-            <span className="sr-only">Clickworks home</span>
+          <a href="#top" className="shrink-0 text-xl text-ink">
+            <Wordmark alt="Clickworks home" priority sizes="130px" />
           </a>
 
           <ul className="hidden items-center gap-7 md:flex">
