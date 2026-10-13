@@ -1,26 +1,40 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { clsx } from "@/lib/clsx";
 
 /**
  * Full-bleed, snap-scrolling rail. Cards peek in from both edges the way the
  * wireframe shows them; the buttons are a convenience on top of native
  * scrolling, so touch, trackpad and keyboard all work without them.
+ *
+ * With `autoplay` the rail advances one card at a time and wraps at the end.
+ * It holds still while someone is hovering, touching or tabbing through it,
+ * while the tab is in the background, and while it is scrolled out of view —
+ * and never starts at all when the visitor prefers reduced motion.
  */
 export function Carousel({
   label,
   children,
   className,
+  autoplay = false,
+  interval = 4000,
 }: {
   label: string;
   children: React.ReactNode;
   className?: string;
+  autoplay?: boolean;
+  interval?: number;
 }) {
   const railRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
+
+  // `playing` drives the button; `heldRef` is the transient hover/focus hold.
+  const [playing, setPlaying] = useState(autoplay);
+  const [canAutoplay, setCanAutoplay] = useState(false);
+  const heldRef = useRef(false);
 
   const sync = useCallback(() => {
     const rail = railRef.current;
@@ -39,17 +53,75 @@ export function Carousel({
     return () => observer.disconnect();
   }, [sync]);
 
-  const step = (direction: -1 | 1) => {
+  const step = useCallback((direction: -1 | 1) => {
     const rail = railRef.current;
     if (!rail) return;
     // Advance by roughly one card, derived from the first child's width.
     const card = rail.firstElementChild as HTMLElement | null;
     const distance = card ? card.offsetWidth + 16 : rail.clientWidth * 0.8;
     rail.scrollBy({ left: direction * distance, behavior: "smooth" });
+  }, []);
+
+  // Honour the reduced-motion preference, and keep honouring it if it changes.
+  useEffect(() => {
+    if (!autoplay || typeof window === "undefined") return;
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => {
+      setCanAutoplay(!query.matches);
+      setPlaying(!query.matches);
+    };
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, [autoplay]);
+
+  useEffect(() => {
+    if (!canAutoplay || !playing) return;
+    const rail = railRef.current;
+    if (!rail) return;
+
+    let onScreen = true;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        onScreen = entry.isIntersecting;
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(rail);
+
+    const timer = window.setInterval(() => {
+      if (heldRef.current || !onScreen || document.hidden) return;
+      const max = rail.scrollWidth - rail.clientWidth;
+      if (rail.scrollLeft >= max - 1) {
+        rail.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        step(1);
+      }
+    }, interval);
+
+    return () => {
+      window.clearInterval(timer);
+      observer.disconnect();
+    };
+  }, [canAutoplay, playing, interval, step]);
+
+  const hold = () => {
+    heldRef.current = true;
+  };
+  const release = () => {
+    heldRef.current = false;
   };
 
   return (
-    <div className={clsx("relative", className)}>
+    <div
+      className={clsx("relative", className)}
+      onMouseEnter={hold}
+      onMouseLeave={release}
+      onFocusCapture={hold}
+      onBlurCapture={release}
+      onTouchStart={hold}
+      onTouchEnd={release}
+    >
       <div
         ref={railRef}
         onScroll={sync}
@@ -69,13 +141,23 @@ export function Carousel({
 
       <div className="mt-6 flex items-center justify-center gap-3">
         <RailButton
-          direction="left"
+          icon={ChevronLeft}
           disabled={atStart}
           onClick={() => step(-1)}
           label={`Scroll ${label} backward`}
         />
+
+        {/* WCAG asks for an explicit stop for anything that moves on its own. */}
+        {canAutoplay && (
+          <RailButton
+            icon={playing ? Pause : Play}
+            onClick={() => setPlaying((value) => !value)}
+            label={playing ? `Pause ${label}` : `Play ${label}`}
+          />
+        )}
+
         <RailButton
-          direction="right"
+          icon={ChevronRight}
           disabled={atEnd}
           onClick={() => step(1)}
           label={`Scroll ${label} forward`}
@@ -86,17 +168,16 @@ export function Carousel({
 }
 
 function RailButton({
-  direction,
-  disabled,
+  icon: Icon,
+  disabled = false,
   onClick,
   label,
 }: {
-  direction: "left" | "right";
-  disabled: boolean;
+  icon: React.ComponentType<{ className?: string }>;
+  disabled?: boolean;
   onClick: () => void;
   label: string;
 }) {
-  const Icon = direction === "left" ? ChevronLeft : ChevronRight;
   return (
     <button
       type="button"

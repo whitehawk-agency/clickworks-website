@@ -25,7 +25,7 @@ export function OurWork() {
         </h2>
       </Container>
 
-      <Carousel label="Projects" className="mt-10 sm:mt-14">
+      <Carousel label="Projects" autoplay interval={4500} className="mt-10 sm:mt-14">
         {/* Wireframe's labelled carousel affordance, kept as the second card */}
         <ProjectCard project={PROJECTS[0]} />
 

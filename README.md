@@ -23,17 +23,28 @@ Sections render top-to-bottom from `app/page.tsx`:
 | Section | Component | Anchor |
 | --- | --- | --- |
 | Sticky navigation + CTA | `components/Navbar.tsx` | — |
-| Hero + "Insert Video" slot | `components/Hero.tsx` | `#top`, `#about` |
-| "Our work, Real Results." carousel | `components/OurWork.tsx` | `#work` |
-| iOS badge, value prop, service tiles, stats | `components/Services.tsx` | `#features`, `#services` |
-| "Life with clickworks" team carousel | `components/TeamSection.tsx` | `#plans` |
+| Hero, "Insert Video" slot, iOS badge | `components/Hero.tsx` | `#top`, `#about` |
+| "Our work, Real Results." (auto-playing) | `components/OurWork.tsx` | `#work` |
+| Value prop, service tiles, team rail | `components/Services.tsx` | `#features`, `#services` |
+| Team rail (auto-playing) | `components/PeopleRail.tsx` | — |
+| "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#plans` |
 | Contact form | `components/ContactForm.tsx` | `#contact` |
 | Footer | `components/Footer.tsx` | — |
 
 Shared pieces live alongside them: `Container` (page gutter and max width),
-`Carousel` (the snap-scrolling rail both carousels use), `Wordmark`,
+`Carousel` (the snap-scrolling rail every carousel uses), `Wordmark`,
 `SketchArrow` (the hand-drawn arrow from the wireframe), `VideoShowcase`,
-`ServiceTiles` and `AppleIcon`.
+`ServiceTiles`, `AppDownloadBadge` and `AppleIcon`.
+
+### Auto-playing rails
+
+`Carousel` takes `autoplay` and an `interval`. It advances one card at a time
+and wraps at the end, and it holds still while someone is hovering, touching or
+tabbing through it, while the tab is backgrounded, and while it is scrolled out
+of view. It never starts for a visitor who prefers reduced motion, and it
+always renders a pause control — auto-moving content needs one. The projects
+and team rails auto-play; the testimonial rail does not, since moving the rail
+would interrupt playback.
 
 ## Design tokens
 
@@ -51,14 +62,19 @@ palette there and it propagates across the page.
 
 ## Notes for whoever picks this up
 
-- **Content is placeholder.** Project names, team members and stat figures are
-  stand-ins; swap the `PROJECTS`, `TEAM` and `STATS` arrays for real data.
+- **Content is placeholder.** Project names, team members and testimonial
+  quotes are stand-ins; swap the `PROJECTS`, `TEAM` and `TESTIMONIALS` arrays
+  for real data.
 - **The video slot is empty.** `VideoShowcase` renders the "Insert Video"
   placeholder until you pass it a `src`, at which point it becomes a
   click-to-play player.
+- **Testimonials are not wired to the social feeds yet.** Each entry takes a
+  `src` and `poster`; fill them from a manual pull, or from a route handler
+  that caches the latest clips from each platform's API. Until then the cards
+  render as posters and do not play.
 - **The contact form has no backend.** `handleSubmit` currently just flips to
   the success state — point it at a route handler or form service.
-- **Team portraits** are placeholder circles in `MemberCard`; drop in
+- **Team portraits** are initials on a gradient in `PeopleRail`; drop in
   `next/image` once you have the photography.
 
 ## Accessibility & motion

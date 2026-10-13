@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { VideoShowcase } from "@/components/VideoShowcase";
 import { Wordmark } from "@/components/Wordmark";
+import { AppDownloadBadge } from "@/components/AppDownloadBadge";
 
 export function Hero() {
   return (
@@ -17,7 +18,7 @@ export function Hero() {
         </Container>
       </div>
 
-      {/* Welcome + video */}
+      {/* Welcome + video + app download */}
       <Container className="scroll-mt-20 py-16 sm:py-24" id="about">
         <h2 className="text-center text-2xl font-medium tracking-tight text-ink sm:text-3xl">
           Welcome to{" "}
@@ -26,6 +27,10 @@ export function Hero() {
 
         <div className="mx-auto mt-8 max-w-4xl sm:mt-10">
           <VideoShowcase />
+        </div>
+
+        <div className="mt-10 flex justify-center sm:mt-12">
+          <AppDownloadBadge />
         </div>
       </Container>
     </section>
