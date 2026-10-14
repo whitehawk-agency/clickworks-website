@@ -25,8 +25,7 @@ Sections render top-to-bottom from `app/page.tsx`:
 | Sticky navigation + CTA | `components/Navbar.tsx` | — |
 | Hero, "Insert Video" slot, iOS badge | `components/Hero.tsx` | `#top`, `#about` |
 | "Our work, Real Results." (auto-playing) | `components/OurWork.tsx` | `#work` |
-| Value prop, service tiles, team rail | `components/Services.tsx` | `#features`, `#services` |
-| Team rail (auto-playing) | `components/PeopleRail.tsx` | — |
+| Value prop, service tiles | `components/Services.tsx` | `#features`, `#services` |
 | "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#community` |
 | Brand marks lucide lacks (TikTok, X) | `components/BrandIcons.tsx` | — |
 | Footer | `components/Footer.tsx` | — |
@@ -44,7 +43,7 @@ tabbing through it, while the tab is backgrounded, and while it is scrolled out
 of view. It never starts for a visitor who prefers reduced motion, and it
 holds still while someone hovers, touches or tabs through it, while the tab is
 backgrounded, and while it is scrolled out of view. It never starts for a
-visitor who prefers reduced motion. The projects and team rails auto-play with
+visitor who prefers reduced motion. The projects and The projects rail auto-plays with
 `arrows={false}`; the testimonials are a static grid.
 
 There is deliberately no pause button. WCAG 2.2.2 asks for a visible way to
@@ -83,12 +82,9 @@ palette there and it propagates across the page.
   for real data.
 - **Imagery is the main gap.** Three card types are built to carry a photo and
   render a neutral slot until they get one: project cards (`photo` + a white
-  `logo` per client), team cards (`photo` headshot) and testimonial cards
-  (`poster`). Drop files in `/public` and reference them from each array —
-  the layout does not change when they land.
-- **The team rail shows the Clickworks mark on every card**, matching the
-  reference layout. If the rail ever mixes in people from other companies,
-  give `Person` a per-person logo and swap it in `PersonCard`.
+  `logo` per client) and testimonial cards (`poster`). Drop files in `/public`
+  and reference them from each array — the layout does not change when they
+  land.
 - **The video slot is empty.** `VideoShowcase` renders the "Insert Video"
   placeholder until you pass it a `src`, at which point it becomes a
   click-to-play player.

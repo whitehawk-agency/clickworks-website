@@ -73,6 +73,30 @@
 }
 
 @layer utilities {
+  /*
+   * Hero wash: a deep blue vertical fade with a brighter glow sitting behind
+   * the lockup, in the vein of Apple's product hero headers. Layered as two
+   * background images — the radial glow over the linear fade — so it stays
+   * one paint with no extra elements.
+   */
+  .hero-sky {
+    background-color: #04060f;
+    background-image:
+      radial-gradient(
+        95% 62% at 50% 20%,
+        rgba(74, 139, 255, 0.55) 0%,
+        rgba(37, 99, 235, 0.26) 40%,
+        rgba(4, 6, 15, 0) 72%
+      ),
+      linear-gradient(
+        180deg,
+        #0c3080 0%,
+        #0a1d52 36%,
+        #070e26 70%,
+        #04060f 100%
+      );
+  }
+
   /* Horizontal carousel rails: snap, no visible scrollbar */
   .no-scrollbar {
     scrollbar-width: none;
