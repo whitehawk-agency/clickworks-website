@@ -27,6 +27,7 @@ Sections render top-to-bottom from `app/page.tsx`:
 | "Our work, Real Results." (auto-playing) | `components/OurWork.tsx` | `#work` |
 | Value prop, service tiles | `components/Services.tsx` | `#features`, `#services` |
 | "Life with clickworks" testimonial videos | `components/Testimonials.tsx` | `#community` |
+| Service-tile artwork (3 animated SVGs) | `components/ServiceGraphics.tsx` | — |
 | Brand marks lucide lacks (TikTok, X) | `components/BrandIcons.tsx` | — |
 | Footer | `components/Footer.tsx` | — |
 

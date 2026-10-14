@@ -119,6 +119,13 @@
   --animate-sweep: sweep 3.2s var(--ease-out-soft) infinite;
   --animate-orbit: orbit 9s linear infinite;
   --animate-breathe: breathe 3.6s ease-in-out infinite;
+
+  /* Service-tile artwork */
+  --animate-scan: scan 4.5s var(--ease-out-soft) infinite;
+  --animate-float-up: float-up 3.4s ease-out infinite;
+  --animate-swatch: swatch 3s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 14s linear infinite;
+  --animate-tick: tick 3.4s var(--ease-out-soft) infinite;
 }
 
 @keyframes rise {
@@ -159,5 +166,75 @@
   50% {
     transform: scale(1.08);
     opacity: 1;
+  }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Service-tile artwork keyframes. Transforms inside SVG need `transform-box:
+   fill-box` (see .svg-fx) so they pivot on their own bounding box rather than
+   the SVG viewport's origin.
+--------------------------------------------------------------------------- */
+@keyframes scan {
+  0%,
+  10% {
+    transform: translateX(-70px);
+  }
+  70%,
+  100% {
+    transform: translateX(250px);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5);
+  }
+  18% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-62px) scale(0.85);
+  }
+}
+
+@keyframes swatch {
+  0%,
+  100% {
+    opacity: 0.22;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes tick {
+  0%,
+  30% {
+    transform: scaleY(0.35);
+  }
+  60%,
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@layer utilities {
+  /* Makes SVG transforms pivot on the element itself. */
+  .svg-fx {
+    transform-box: fill-box;
+    transform-origin: center;
   }
 }
