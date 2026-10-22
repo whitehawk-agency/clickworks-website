@@ -7,7 +7,7 @@ export function Services() {
     <section id="features" className="scroll-mt-20 pb-16 pt-6 sm:pb-24 sm:pt-10">
       <Container>
         {/* Value proposition — sized to break onto two lines */}
-        <p className="mx-auto max-w-4xl text-balance text-center text-2xl font-semibold leading-snug tracking-tight text-ink sm:text-3xl">
+        <p className="mx-auto max-w-4xl text-balance text-center text-[clamp(1rem,4.3vw,1.125rem)] font-semibold leading-snug tracking-tight text-ink sm:text-3xl">
           Imagine the power of 1,000 marketers in your pocket, always analyzing
           your strategy. Ready to diagnose and prescribe.
         </p>
