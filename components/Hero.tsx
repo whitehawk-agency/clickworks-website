@@ -12,7 +12,7 @@ export function Hero() {
         keeps mobile browser chrome from cropping it.
       */}
       <div className="hero-sky">
-        <Container className="flex min-h-[calc(100svh-4rem)] flex-col items-center justify-start pb-16 pt-24 text-center sm:pt-32">
+        <Container className="flex min-h-[calc(100svh-4rem)] flex-col items-center justify-center py-20 text-center sm:py-24">
           <p className="text-5xl font-semibold leading-none tracking-tight text-white sm:text-7xl">
             Introducing
           </p>
@@ -24,6 +24,10 @@ export function Hero() {
           <h1 className="mt-1 flex justify-center text-6xl sm:text-8xl lg:text-9xl">
             <Wordmark onDark priority />
           </h1>
+
+          <div className="mt-10 sm:mt-12">
+            <AppDownloadBadge onDark />
+          </div>
         </Container>
       </div>
 
