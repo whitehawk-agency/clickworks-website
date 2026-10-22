@@ -53,13 +53,13 @@ export function OurWork() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="relative aspect-7/10 w-[clamp(152px,41vw,258px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
+    <article className="relative aspect-7/10 w-[clamp(170px,46vw,258px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
       {project.photo ? (
         <Image
           src={project.photo}
           alt={`${project.client} project`}
           fill
-          sizes="(max-width: 640px) 41vw, 258px"
+          sizes="(max-width: 640px) 46vw, 258px"
           className="object-cover"
         />
       ) : (
