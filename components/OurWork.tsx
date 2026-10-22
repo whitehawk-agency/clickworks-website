@@ -53,13 +53,13 @@ export function OurWork() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="relative aspect-7/10 w-[clamp(230px,66vw,300px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
+    <article className="relative aspect-7/10 w-[clamp(170px,46vw,230px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
       {project.photo ? (
         <Image
           src={project.photo}
           alt={`${project.client} project`}
           fill
-          sizes="(max-width: 640px) 66vw, 300px"
+          sizes="(max-width: 640px) 46vw, 230px"
           className="object-cover"
         />
       ) : (
@@ -75,7 +75,7 @@ function ProjectCard({ project }: { project: Project }) {
         className="absolute inset-x-0 top-0 h-2/5 bg-linear-to-b from-black/55 to-transparent"
       />
 
-      <div className="absolute inset-x-0 top-0 flex justify-center px-6 pt-7">
+      <div className="absolute inset-x-0 top-0 flex justify-center px-4 pt-6">
         {project.logo ? (
           <Image
             src={project.logo}
@@ -83,13 +83,13 @@ function ProjectCard({ project }: { project: Project }) {
             width={project.logoWidth ?? 320}
             height={project.logoHeight ?? 80}
             sizes="200px"
-            className="h-9 w-auto object-contain sm:h-10"
+            className="h-7 w-auto object-contain sm:h-8"
           />
         ) : (
           <span
             className={clsx(
-              "text-center text-sm font-semibold uppercase leading-tight tracking-[0.22em] text-white",
-              "sm:text-base",
+              "text-center text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-white",
+              "sm:text-sm",
             )}
           >
             {project.client}

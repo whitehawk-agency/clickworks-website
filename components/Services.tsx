@@ -18,7 +18,7 @@ export function Services() {
         </div>
 
         {/* Human proof */}
-        <p className="mx-auto mt-16 max-w-3xl text-balance text-center text-[2rem] font-bold leading-[1.12] tracking-tight text-ink sm:mt-20 sm:text-4xl">
+        <p className="mx-auto mt-16 max-w-3xl text-balance text-center text-2xl font-bold leading-[1.15] tracking-tight text-ink sm:mt-20 sm:text-3xl">
           Real people providing world-class, evidence-based strategies.
         </p>
       </Container>
@@ -26,10 +26,10 @@ export function Services() {
       <Container className="mt-10 flex justify-center sm:mt-12">
         <a
           href="#community"
-          className="inline-flex items-center gap-[18px] rounded-full border border-[#f2f2f2] bg-paper px-10 py-[13px] text-lg font-normal text-[#545454] shadow-soft transition-colors hover:border-line sm:px-[104px] sm:text-xl"
+          className="inline-flex items-center gap-3 rounded-full border border-[#f2f2f2] bg-paper px-6 py-3 text-base font-normal text-[#545454] shadow-soft transition-colors hover:border-line sm:px-16"
         >
           Meet Core Team
-          <ArrowUpRight className="size-7 shrink-0" strokeWidth={2} />
+          <ArrowUpRight className="size-5 shrink-0" strokeWidth={2} />
         </a>
       </Container>
     </section>

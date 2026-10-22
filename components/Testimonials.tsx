@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Facebook, Instagram, Linkedin, Play, Youtube } from "lucide-react";
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { Carousel } from "@/components/Carousel";
 import { Wordmark } from "@/components/Wordmark";
 import { GradientBall } from "@/components/GradientBall";
 import { CONTACT_HREF } from "@/lib/links";
@@ -62,12 +63,20 @@ export function Testimonials() {
           Life with <Wordmark className="h-[0.8em]" />
         </h2>
 
-        <div className="mt-10 grid gap-5 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
-          {TESTIMONIALS.map((testimonial) => (
-            <TestimonialCard key={testimonial.handle} testimonial={testimonial} />
-          ))}
-        </div>
+      </Container>
 
+      {/*
+        A rail rather than a grid. Deliberately not autoplaying: these cards
+        play video, and a rail that slides itself would pull a clip off screen
+        mid-sentence.
+      */}
+      <Carousel label="Testimonials" arrows={false} className="mt-10 sm:mt-14">
+        {TESTIMONIALS.map((testimonial) => (
+          <TestimonialCard key={testimonial.handle} testimonial={testimonial} />
+        ))}
+      </Carousel>
+
+      <Container>
         <div className="mt-10 flex justify-center sm:mt-12">
           <a
             href={CONTACT_HREF}
@@ -89,7 +98,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
   if (testimonial.src && playing) {
     return (
-      <article className="relative aspect-4/5 overflow-hidden rounded-3xl bg-ink shadow-soft">
+      <article className="relative aspect-4/5 w-[clamp(250px,74vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
         <video
           className="absolute inset-0 size-full object-cover"
           src={testimonial.src}
@@ -103,13 +112,13 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   }
 
   return (
-    <article className="relative aspect-4/5 overflow-hidden rounded-3xl bg-ink shadow-soft">
+    <article className="relative aspect-4/5 w-[clamp(250px,74vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
       {testimonial.poster ? (
         <Image
           src={testimonial.poster}
           alt=""
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
+          sizes="(max-width: 640px) 74vw, 320px"
           className="object-cover"
         />
       ) : (
