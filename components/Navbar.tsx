@@ -38,11 +38,11 @@ export function Navbar() {
         >
           {/* Logo, links and the CTA all read as one group */}
           <div className="flex min-w-0 items-center gap-7">
-            <a href="#top" className="shrink-0 text-4xl text-ink md:text-xl">
+            <a href="#top" className="shrink-0 text-3xl text-ink md:text-xl">
               <Wordmark
                 alt="Clickworks home"
                 priority
-                sizes="(max-width: 768px) 190px, 130px"
+                sizes="(max-width: 768px) 160px, 130px"
               />
             </a>
 
