@@ -31,10 +31,10 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-line/80 bg-paper/85 backdrop-blur-md">
-      <Container>
+      <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
         <nav
           aria-label="Main"
-          className="relative flex h-16 items-center justify-center gap-4"
+          className="relative flex h-16 items-center justify-start gap-4 md:justify-center"
         >
           {/* Logo, links and the CTA all read as one group */}
           <div className="flex min-w-0 items-center gap-7">
@@ -78,7 +78,7 @@ export function Navbar() {
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </nav>
-      </Container>
+      </div>
 
       {/* Mobile sheet */}
       <div

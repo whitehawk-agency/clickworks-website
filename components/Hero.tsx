@@ -28,16 +28,16 @@ export function Hero() {
       </div>
 
       {/* Welcome + video + app download */}
-      <Container className="scroll-mt-20 py-16 sm:py-24" id="about">
+      <Container className="scroll-mt-20 pb-6 pt-16 sm:py-24" id="about">
         <h2 className="flex flex-wrap items-center justify-center gap-x-2.5 text-center text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-4xl">
           Welcome to <Wordmark className="h-[0.85em]" />
         </h2>
 
-        <div className="mx-auto mt-8 max-w-4xl sm:mt-10">
+        <div className="mx-auto mt-6 max-w-4xl sm:mt-10">
           <VideoShowcase />
         </div>
 
-        <div className="mt-10 flex justify-center sm:mt-12">
+        <div className="mt-5 flex justify-center sm:mt-12">
           <AppDownloadBadge />
         </div>
       </Container>

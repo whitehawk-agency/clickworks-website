@@ -57,7 +57,7 @@ const TESTIMONIALS: Testimonial[] = [
 
 export function Testimonials() {
   return (
-    <section id="community" className="scroll-mt-20 bg-paper-soft py-16 sm:py-24">
+    <section id="community" className="scroll-mt-20 bg-paper-soft pb-10 pt-10 sm:py-24">
       <Container>
         <h2 className="flex flex-wrap items-center justify-center gap-x-3 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
           Life with <Wordmark className="h-[0.8em]" />
@@ -70,20 +70,20 @@ export function Testimonials() {
         play video, and a rail that slides itself would pull a clip off screen
         mid-sentence.
       */}
-      <Carousel label="Testimonials" arrows={false} className="mt-10 sm:mt-14">
+      <Carousel label="Testimonials" arrows={false} className="mt-6 sm:mt-14">
         {TESTIMONIALS.map((testimonial) => (
           <TestimonialCard key={testimonial.handle} testimonial={testimonial} />
         ))}
       </Carousel>
 
       <Container>
-        <div className="mt-10 flex justify-center sm:mt-12">
+        <div className="mt-4 flex justify-center sm:mt-12">
           <a
             href={CONTACT_HREF}
-            className="inline-flex items-center gap-4 rounded-full bg-black px-4 py-3 text-lg font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2.5 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:gap-4 sm:py-3 sm:text-lg"
           >
+            <GradientBall className="size-4 sm:size-6" />
             Explore all stories
-            <GradientBall className="size-6" />
           </a>
         </div>
       </Container>
@@ -98,7 +98,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
 
   if (testimonial.src && playing) {
     return (
-      <article className="relative aspect-4/5 w-[clamp(250px,74vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
+      <article className="relative aspect-4/5 w-[clamp(190px,50vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
         <video
           className="absolute inset-0 size-full object-cover"
           src={testimonial.src}
@@ -112,13 +112,13 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   }
 
   return (
-    <article className="relative aspect-4/5 w-[clamp(250px,74vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
+    <article className="relative aspect-4/5 w-[clamp(190px,50vw,320px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft">
       {testimonial.poster ? (
         <Image
           src={testimonial.poster}
           alt=""
           fill
-          sizes="(max-width: 640px) 74vw, 320px"
+          sizes="(max-width: 640px) 50vw, 320px"
           className="object-cover"
         />
       ) : (
@@ -143,22 +143,22 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
             : undefined
         }
         aria-disabled={!testimonial.src}
-        className="group absolute inset-0 flex flex-col justify-end p-6 text-left"
+        className="group absolute inset-0 flex flex-col justify-end p-4 text-left sm:p-6"
       >
         <span className="absolute right-5 top-5 flex size-10 items-center justify-center rounded-full bg-white/15 ring-1 ring-white/25 backdrop-blur-sm transition-colors group-hover:bg-white/25">
           <Play className="size-4 translate-x-px fill-white text-white" />
         </span>
 
-        <span className="relative block text-base font-medium leading-snug text-white sm:text-lg">
+        <span className="relative block text-xs font-medium leading-snug text-white sm:text-lg">
           &ldquo;{testimonial.quote}&rdquo;
         </span>
 
         <span className="relative mt-4 flex items-center gap-2">
-          <span className="text-sm font-semibold text-white">
+          <span className="whitespace-nowrap text-[0.6875rem] font-semibold text-white sm:text-sm">
             {testimonial.name}
           </span>
           <PlatformIcon className="size-3.5 shrink-0 text-white/55" />
-          <span className="truncate text-sm text-white/55">
+          <span className="truncate text-[0.6875rem] text-white/55 sm:text-sm">
             {testimonial.handle}
           </span>
         </span>

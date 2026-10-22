@@ -29,7 +29,7 @@ const PROJECTS: Project[] = [
 
 export function OurWork() {
   return (
-    <section id="work" className="scroll-mt-20 py-16 sm:py-24">
+    <section id="work" className="scroll-mt-20 pb-2 pt-6 sm:py-24">
       <Container>
         <h2 className="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
           Our work, Real Results.
@@ -41,7 +41,7 @@ export function OurWork() {
         autoplay
         interval={4500}
         arrows={false}
-        className="mt-10 sm:mt-14"
+        className="mt-7 sm:mt-14"
       >
         {PROJECTS.map((project) => (
           <ProjectCard key={project.client} project={project} />
@@ -53,13 +53,13 @@ export function OurWork() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="relative aspect-7/10 w-[clamp(170px,46vw,230px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
+    <article className="relative aspect-7/10 w-[clamp(120px,32vw,230px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
       {project.photo ? (
         <Image
           src={project.photo}
           alt={`${project.client} project`}
           fill
-          sizes="(max-width: 640px) 46vw, 230px"
+          sizes="(max-width: 640px) 32vw, 230px"
           className="object-cover"
         />
       ) : (
@@ -75,7 +75,7 @@ function ProjectCard({ project }: { project: Project }) {
         className="absolute inset-x-0 top-0 h-2/5 bg-linear-to-b from-black/55 to-transparent"
       />
 
-      <div className="absolute inset-x-0 top-0 flex justify-center px-4 pt-6">
+      <div className="absolute inset-x-0 top-0 flex justify-center px-3 pt-4 sm:px-4 sm:pt-6">
         {project.logo ? (
           <Image
             src={project.logo}
@@ -83,13 +83,13 @@ function ProjectCard({ project }: { project: Project }) {
             width={project.logoWidth ?? 320}
             height={project.logoHeight ?? 80}
             sizes="200px"
-            className="h-7 w-auto object-contain sm:h-8"
+            className="h-5 w-auto object-contain sm:h-8"
           />
         ) : (
           <span
             className={clsx(
-              "text-center text-xs font-semibold uppercase leading-tight tracking-[0.18em] text-white",
-              "sm:text-sm",
+              "text-center text-[0.625rem] font-semibold uppercase leading-tight tracking-[0.12em] text-white",
+              "sm:text-sm sm:tracking-[0.18em]",
             )}
           >
             {project.client}

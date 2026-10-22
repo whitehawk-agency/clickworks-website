@@ -12,7 +12,7 @@ import {
  */
 export function ServiceTiles() {
   return (
-    <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
+    <div className="grid gap-7 sm:grid-cols-3 sm:gap-5">
       <Tile title="Websites" graphic={<WebsitesGraphic />} />
       <Tile title="Social Media" graphic={<SocialGraphic />} />
       <Tile title="Branding" graphic={<BrandingGraphic />} />
@@ -24,7 +24,7 @@ function Tile({ title, graphic }: { title: string; graphic: React.ReactNode }) {
   return (
     <article
       className={clsx(
-        "group relative flex aspect-4/3 flex-col justify-between overflow-hidden rounded-3xl bg-ink p-6 shadow-soft",
+        "group relative flex aspect-3/2 flex-col justify-between overflow-hidden rounded-3xl bg-ink p-6 shadow-soft",
         "transition-transform duration-500 ease-(--ease-out-soft) hover:-translate-y-1 sm:aspect-square",
       )}
     >
