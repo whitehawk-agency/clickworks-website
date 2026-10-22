@@ -32,7 +32,7 @@ export function OurWork() {
     <section id="work" className="scroll-mt-20 pb-2 pt-6 sm:py-24">
       <Container>
         <h2 className="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
-          Our work, Real Results.
+          Our Work, Real Results.
         </h2>
       </Container>
 
@@ -53,13 +53,13 @@ export function OurWork() {
 
 function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="relative aspect-7/10 w-[clamp(135px,36vw,230px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
+    <article className="relative aspect-7/10 w-[clamp(152px,41vw,258px)] shrink-0 snap-start overflow-hidden rounded-3xl bg-ink shadow-soft-lg">
       {project.photo ? (
         <Image
           src={project.photo}
           alt={`${project.client} project`}
           fill
-          sizes="(max-width: 640px) 36vw, 230px"
+          sizes="(max-width: 640px) 41vw, 258px"
           className="object-cover"
         />
       ) : (
