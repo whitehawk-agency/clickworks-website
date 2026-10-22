@@ -38,13 +38,30 @@ export function Navbar() {
         >
           {/* Logo, links and the CTA all read as one group */}
           <div className="flex min-w-0 items-center gap-7">
-            <a href="#top" className="shrink-0 text-2xl text-ink md:text-xl">
+            <a
+              href="#top"
+              className={clsx(
+                "shrink-0 text-2xl text-ink md:text-xl",
+                open && "hidden md:block",
+              )}
+            >
               <Wordmark
                 alt="Clickworks home"
                 priority
                 sizes="(max-width: 768px) 140px, 130px"
               />
             </a>
+
+            {/* Opposite the X while the sheet is open, phones only. */}
+            {open && (
+              <a
+                href={CONTACT_HREF}
+                onClick={() => setOpen(false)}
+                className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-accent-strong md:hidden"
+              >
+                Get Started
+              </a>
+            )}
 
             <ul className="hidden items-center gap-7 md:flex">
               {NAV_LINKS.map((link) => (
@@ -84,7 +101,7 @@ export function Navbar() {
       <div
         id="mobile-nav"
         hidden={!open}
-        className="border-t border-line bg-paper md:hidden"
+        className="min-h-[calc(100svh-4rem)] border-t border-line bg-paper md:hidden"
       >
         <Container className="py-4">
           <ul className="flex flex-col">
@@ -94,7 +111,7 @@ export function Navbar() {
                   href={link.href}
                   onClick={() => setOpen(false)}
                   className={clsx(
-                    "block rounded-xl px-2 py-3 text-base font-medium text-ink",
+                    "block rounded-xl px-2 py-4 text-xl font-medium text-ink",
                     "transition-colors hover:bg-paper-soft",
                   )}
                 >
@@ -103,13 +120,6 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <a
-            href={CONTACT_HREF}
-            onClick={() => setOpen(false)}
-            className="mt-3 flex w-full items-center justify-center rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white"
-          >
-            Get Started
-          </a>
         </Container>
       </div>
     </header>
