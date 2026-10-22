@@ -36,14 +36,6 @@ const COLUMNS = [
     ],
   },
   {
-    heading: "For Clients",
-    links: [
-      { label: "Get Started", href: CONTACT_HREF },
-      { label: "Community", href: "#community" },
-      { label: "Support", href: CONTACT_HREF },
-    ],
-  },
-  {
     heading: "Learn",
     links: [
       { label: "News", href: CONTACT_HREF },
@@ -69,7 +61,7 @@ export function Footer() {
           <Wordmark alt="Clickworks home" sizes="200px" />
         </a>
 
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
               <h2 className="text-sm font-medium text-ink-muted">

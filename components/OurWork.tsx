@@ -31,7 +31,7 @@ export function OurWork() {
   return (
     <section id="work" className="scroll-mt-20 py-16 sm:py-24">
       <Container>
-        <h2 className="text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 className="text-center text-2xl font-bold tracking-tight text-ink sm:text-3xl lg:text-4xl">
           Our work, Real Results.
         </h2>
       </Container>

@@ -29,7 +29,7 @@ export function Hero() {
 
       {/* Welcome + video + app download */}
       <Container className="scroll-mt-20 py-16 sm:py-24" id="about">
-        <h2 className="flex flex-wrap items-center justify-center gap-x-2.5 text-center text-xl font-semibold tracking-tight text-ink sm:text-2xl lg:text-3xl">
+        <h2 className="flex flex-wrap items-center justify-center gap-x-2.5 text-center text-2xl font-semibold tracking-tight text-ink sm:text-3xl lg:text-4xl">
           Welcome to <Wordmark className="h-[0.85em]" />
         </h2>
 
