@@ -15,15 +15,15 @@ export function AppDownloadBadge({
     <a
       href={CONTACT_HREF}
       className={clsx(
-        "inline-flex items-center gap-2.5 rounded-full px-4 py-2 shadow-soft",
-        "sm:gap-3 sm:px-6 sm:py-3",
+        "inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 shadow-soft",
+        "sm:gap-3 sm:px-7 sm:py-3.5",
         "transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5",
         onDark ? "bg-white text-ink" : "bg-ink text-white",
         className,
       )}
     >
-      <AppleIcon className="size-4 shrink-0 sm:size-5" />
-      <span className="text-sm font-semibold tracking-tight sm:text-base">
+      <AppleIcon className="size-[1.125rem] shrink-0 sm:size-6" />
+      <span className="text-[0.9375rem] leading-5 font-semibold tracking-tight sm:text-lg sm:leading-7">
         Download on iOS
       </span>
     </a>

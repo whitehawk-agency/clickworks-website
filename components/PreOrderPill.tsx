@@ -10,8 +10,8 @@ export function PreOrderPill({ className }: { className?: string }) {
     <a
       href={CONTACT_HREF}
       className={clsx(
-        "inline-flex items-center justify-center rounded-full bg-[#151823] px-5 py-2",
-        "text-sm font-medium tracking-tight text-[#e0e1e0] sm:px-6 sm:py-3 sm:text-base",
+        "inline-flex items-center justify-center rounded-full bg-[#151823] px-6 py-2.5",
+        "text-[0.9375rem] leading-5 font-medium tracking-tight text-[#e0e1e0] sm:px-7 sm:py-3.5 sm:text-lg sm:leading-7",
         "transition-colors duration-300 ease-(--ease-out-soft) hover:bg-[#1e2232]",
         className,
       )}
