@@ -145,6 +145,46 @@
   --animate-tick: tick 3.4s var(--ease-out-soft) infinite;
 }
 
+/* Mission-panel ring: each card drifts and breathes on its own clock. */
+@keyframes card-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(2.5deg) scale(1.04);
+  }
+}
+
+@keyframes card-breathe {
+  0%,
+  100% {
+    opacity: 0.58;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* The ring as a whole rocks a couple of degrees, which ties the cards together
+   without swinging any of them off the panel the way a full turn would. */
+@keyframes ring-sway {
+  0%,
+  100% {
+    transform: rotate(-1.8deg);
+  }
+  50% {
+    transform: rotate(1.8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-card,
+  .ring-sway {
+    animation: none !important;
+  }
+}
+
 @keyframes nav-cta-in {
   from {
     opacity: 0;

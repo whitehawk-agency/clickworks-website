@@ -40,22 +40,37 @@ export function MissionPanel() {
       <Container>
         <div className="relative isolate aspect-4/5 overflow-hidden rounded-[1.75rem] bg-black sm:aspect-video sm:rounded-[2.5rem]">
           {/* The ring itself */}
-          <div aria-hidden className="absolute inset-0">
+          <div aria-hidden className="ring-sway absolute inset-0 animate-[ring-sway_38s_ease-in-out_infinite]">
             {RING.map((c, i) => {
               const rad = (c.a * Math.PI) / 180;
+              // Deterministic spread, so no two neighbours move in step.
+              const dur = 14 + (i % 7) * 1.7;
+              const delay = ((i * 0.83) % 9).toFixed(2);
               return (
                 <div
                   key={i}
-                  className="absolute rounded-[3px] shadow-[0_8px_24px_rgba(0,0,0,0.55)] sm:rounded-[5px]"
+                  className="absolute"
                   style={{
                     left: `${50 + RX * c.r * Math.cos(rad)}%`,
                     top: `${50 + RY * c.r * Math.sin(rad)}%`,
                     width: `${c.w}%`,
-                    aspectRatio: c.ar,
                     transform: `translate(-50%, -50%) rotate(${c.tilt}deg)`,
-                    backgroundImage: `linear-gradient(145deg, ${c.from}, ${c.to})`,
                   }}
-                />
+                >
+                  {/*
+                    The shell owns placement and the face owns motion: a CSS
+                    animation on transform would otherwise replace the
+                    translate/rotate that puts the card on the ring.
+                  */}
+                  <div
+                    className="ring-card w-full rounded-[3px] shadow-[0_8px_24px_rgba(0,0,0,0.55)] will-change-[transform,opacity] sm:rounded-[5px]"
+                    style={{
+                      aspectRatio: c.ar,
+                      backgroundImage: `linear-gradient(145deg, ${c.from}, ${c.to})`,
+                      animation: `card-drift ${dur}s ease-in-out ${delay}s infinite, card-breathe ${(dur * 1.35).toFixed(1)}s ease-in-out ${delay}s infinite`,
+                    }}
+                  />
+                </div>
               );
             })}
           </div>
