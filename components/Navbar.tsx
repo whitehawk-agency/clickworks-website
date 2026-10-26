@@ -56,8 +56,8 @@ export function Navbar() {
           // While the sheet is open the bar goes transparent and the sheet
           // runs behind it, so the two read as one unbroken dark surface.
           open
-            ? "border-transparent bg-transparent backdrop-blur-none md:border-line/80 md:bg-paper/85 md:backdrop-blur-md"
-            : "border-line/80 bg-paper/85 backdrop-blur-md",
+            ? "border-transparent bg-transparent backdrop-blur-none md:border-white/10 md:bg-black/85 md:backdrop-blur-md"
+            : "border-white/10 bg-black/85 backdrop-blur-md",
         )}
       >
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
@@ -70,11 +70,12 @@ export function Navbar() {
               <a
                 href="#top"
                 className={clsx(
-                  "shrink-0 text-2xl text-ink md:text-xl",
+                  "shrink-0 text-2xl text-white md:text-xl",
                   open && "hidden md:block",
                 )}
               >
                 <Wordmark
+                  onDark
                   alt="Clickworks home"
                   priority
                   sizes="(max-width: 768px) 140px, 130px"
@@ -86,7 +87,7 @@ export function Navbar() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="whitespace-nowrap text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+                      className="whitespace-nowrap text-sm font-medium text-white/70 transition-colors hover:text-white"
                     >
                       {link.label}
                     </a>
@@ -116,7 +117,7 @@ export function Navbar() {
                 "inline-flex size-10 items-center justify-center rounded-full transition-colors md:hidden",
                 open
                   ? "order-first -ml-2 text-white hover:bg-white/10"
-                  : "absolute right-0 text-ink hover:bg-paper-soft",
+                  : "absolute right-0 text-white hover:bg-white/10",
               )}
             >
               {open ? <X className="size-6" /> : <Menu className="size-5" />}
