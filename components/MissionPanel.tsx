@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import { Container } from "@/components/Container";
 import { CONTACT_HREF } from "@/lib/links";
 
 /**
@@ -31,14 +30,18 @@ const RING = [
   { a: 174, r: 0.9, w: 8, ar: "3/4", tilt: -13, from: "#242932", to: "#0d0f13" },
 ] as const;
 
-const RX = 33;
-const RY = 36;
-
 export function MissionPanel() {
   return (
-    <section className="scroll-mt-20 py-10 sm:py-24" id="mission">
-      <Container>
-        <div className="relative isolate aspect-4/5 overflow-hidden rounded-[1.75rem] bg-black sm:aspect-video sm:rounded-[2.5rem]">
+    <section className="scroll-mt-20 py-3 sm:py-24" id="mission">
+      {/* Full-bleed on phones, back inside the page gutter from sm up. */}
+      <div className="mx-auto w-full max-w-6xl sm:px-8">
+        {/*
+          The ring's geometry is carried as custom properties so the two
+          layouts can differ: a tall, card-heavy ellipse that bleeds off a
+          full-width phone panel, and the wider, smaller-carded ring on
+          desktop.
+        */}
+        <div className="relative isolate h-[92svh] overflow-hidden bg-black [--card-scale:2.4] [--ring-rx:46%] [--ring-ry:31%] sm:aspect-video sm:h-auto sm:rounded-[2.5rem] sm:[--card-scale:1] sm:[--ring-rx:33%] sm:[--ring-ry:36%]">
           {/* The ring itself */}
           <div aria-hidden className="ring-sway absolute inset-0 animate-[ring-sway_38s_ease-in-out_infinite]">
             {RING.map((c, i) => {
@@ -51,9 +54,9 @@ export function MissionPanel() {
                   key={i}
                   className="absolute"
                   style={{
-                    left: `${50 + RX * c.r * Math.cos(rad)}%`,
-                    top: `${50 + RY * c.r * Math.sin(rad)}%`,
-                    width: `${c.w}%`,
+                    left: `calc(50% + var(--ring-rx) * ${(c.r * Math.cos(rad)).toFixed(4)})`,
+                    top: `calc(50% + var(--ring-ry) * ${(c.r * Math.sin(rad)).toFixed(4)})`,
+                    width: `calc(${c.w}% * var(--card-scale))`,
                     transform: `translate(-50%, -50%) rotate(${c.tilt}deg)`,
                   }}
                 >
@@ -81,12 +84,12 @@ export function MissionPanel() {
           */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(84%_46%_at_50%_50%,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_56%,rgba(0,0,0,0.82)_74%,rgba(0,0,0,0)_94%)] sm:bg-[radial-gradient(closest-side,rgba(0,0,0,1)_0%,rgba(0,0,0,0.97)_42%,rgba(0,0,0,0.6)_66%,rgba(0,0,0,0)_84%)]"
+            className="absolute inset-0 bg-[radial-gradient(96%_32%_at_50%_50%,rgba(0,0,0,1)_0%,rgba(0,0,0,1)_50%,rgba(0,0,0,0.8)_72%,rgba(0,0,0,0)_92%)] sm:bg-[radial-gradient(closest-side,rgba(0,0,0,1)_0%,rgba(0,0,0,0.97)_42%,rgba(0,0,0,0.6)_66%,rgba(0,0,0,0)_84%)]"
           />
           {/* Darkens the outer edge so no card meets the panel's corner */}
           <div
             aria-hidden
-            className="absolute inset-0 bg-[radial-gradient(118%_112%_at_50%_50%,rgba(0,0,0,0)_38%,rgba(0,0,0,0.55)_58%,rgba(0,0,0,0.9)_76%,rgba(0,0,0,1)_92%)]"
+            className="absolute inset-0 bg-[radial-gradient(135%_105%_at_50%_50%,rgba(0,0,0,0)_55%,rgba(0,0,0,0.35)_78%,rgba(0,0,0,0.8)_100%)] sm:bg-[radial-gradient(118%_112%_at_50%_50%,rgba(0,0,0,0)_38%,rgba(0,0,0,0.55)_58%,rgba(0,0,0,0.9)_76%,rgba(0,0,0,1)_92%)]"
           />
 
           <div className="relative flex h-full flex-col items-center justify-center px-6 text-center sm:px-10">
@@ -106,7 +109,7 @@ export function MissionPanel() {
             </a>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
