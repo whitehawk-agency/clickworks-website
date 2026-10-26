@@ -16,6 +16,22 @@ const NAV_LINKS = [
   { label: "Sign Up", href: CONTACT_HREF },
 ];
 
+/** The phone sheet groups the same links under headings. */
+const NAV_GROUPS = [
+  {
+    label: "Explore",
+    links: NAV_LINKS.filter((l) =>
+      ["Features", "Services", "Our Work"].includes(l.label),
+    ),
+  },
+  {
+    label: "Company",
+    links: NAV_LINKS.filter((l) =>
+      ["About Us", "Community", "Sign Up"].includes(l.label),
+    ),
+  },
+];
+
 export function Navbar() {
   const [open, setOpen] = useState(false);
 
@@ -29,9 +45,21 @@ export function Navbar() {
     };
   }, [open]);
 
+  // Running index across the groups, so the links trail in one after another.
+  let order = -1;
+
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-line/80 bg-paper/85 backdrop-blur-md">
+      <header
+        className={clsx(
+          "sticky top-0 z-50 border-b transition-colors duration-300",
+          // While the sheet is open the bar goes transparent and the sheet
+          // runs behind it, so the two read as one unbroken dark surface.
+          open
+            ? "border-transparent bg-transparent backdrop-blur-none md:border-line/80 md:bg-paper/85 md:backdrop-blur-md"
+            : "border-line/80 bg-paper/85 backdrop-blur-md",
+        )}
+      >
         <div className="mx-auto w-full max-w-6xl px-5 sm:px-8">
           <nav
             aria-label="Main"
@@ -52,17 +80,6 @@ export function Navbar() {
                   sizes="(max-width: 768px) 140px, 130px"
                 />
               </a>
-
-              {/* Opposite the X while the sheet is open, phones only. */}
-              {open && (
-                <a
-                  href={CONTACT_HREF}
-                  onClick={() => setOpen(false)}
-                  className="motion-safe:animate-[nav-cta-in_300ms_var(--ease-out-soft)_both] rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-accent-strong md:hidden"
-                >
-                  Get Started
-                </a>
-              )}
 
               <ul className="hidden items-center gap-7 md:flex">
                 {NAV_LINKS.map((link) => (
@@ -85,16 +102,35 @@ export function Navbar() {
               </a>
             </div>
 
+            {/*
+              While the sheet is open the phone bar swaps to the close control
+              on the left, where the wordmark was, and the CTA on the right.
+            */}
             <button
               type="button"
               onClick={() => setOpen((value) => !value)}
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Close menu" : "Open menu"}
-              className="absolute right-0 inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-paper-soft md:hidden"
+              className={clsx(
+                "inline-flex size-10 items-center justify-center rounded-full transition-colors md:hidden",
+                open
+                  ? "order-first -ml-2 text-white hover:bg-white/10"
+                  : "absolute right-0 text-ink hover:bg-paper-soft",
+              )}
             >
-              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+              {open ? <X className="size-6" /> : <Menu className="size-5" />}
             </button>
+
+            {open && (
+              <a
+                href={CONTACT_HREF}
+                onClick={() => setOpen(false)}
+                className="motion-safe:animate-[nav-cta-in_300ms_var(--ease-out-soft)_both] absolute right-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold leading-5 text-ink shadow-soft transition-colors hover:bg-white/90 md:hidden"
+              >
+                Get Started
+              </a>
+            )}
           </nav>
         </div>
       </header>
@@ -109,8 +145,8 @@ export function Navbar() {
         id="mobile-nav"
         aria-hidden={!open}
         className={clsx(
-          "fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto md:hidden",
-          "border-t border-line bg-paper/70 backdrop-blur-xl",
+          "fixed inset-0 z-40 overflow-y-auto md:hidden",
+          "bg-black/75 backdrop-blur-2xl",
           "transition-[opacity,translate,visibility] duration-300 ease-(--ease-out-soft)",
           "motion-reduce:transition-none",
           open
@@ -118,35 +154,54 @@ export function Navbar() {
             : "invisible pointer-events-none -translate-y-2 opacity-0",
         )}
       >
-        <Container className="py-4">
-          <ul className="flex flex-col">
-            {NAV_LINKS.map((link, i) => (
-              <li
-                key={link.label}
-                // Links trail the panel in, one after another.
-                style={{ transitionDelay: open ? `${90 + i * 45}ms` : "0ms" }}
+        <Container className="pb-12 pt-[4.5rem]">
+          {NAV_GROUPS.map((group) => (
+            <section key={group.label} className="mt-6 first:mt-0">
+              <h2
+                style={{
+                  transitionDelay: open ? `${90 + ++order * 45}ms` : "0ms",
+                }}
                 className={clsx(
+                  "px-2 pb-1 text-base font-medium text-white/40",
                   "transition-[opacity,translate] duration-300 ease-(--ease-out-soft)",
                   "motion-reduce:transition-none",
-                  open
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-3 opacity-0",
+                  open ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
                 )}
               >
-                <a
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  tabIndex={open ? undefined : -1}
-                  className={clsx(
-                    "block rounded-xl px-2 py-4 text-xl font-medium text-ink",
-                    "transition-colors hover:bg-paper-soft",
-                  )}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+                {group.label}
+              </h2>
+
+              <ul className="flex flex-col">
+                {group.links.map((link) => (
+                  <li
+                    key={link.label}
+                    style={{
+                      transitionDelay: open ? `${90 + ++order * 45}ms` : "0ms",
+                    }}
+                    className={clsx(
+                      "transition-[opacity,translate] duration-300 ease-(--ease-out-soft)",
+                      "motion-reduce:transition-none",
+                      open
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-3 opacity-0",
+                    )}
+                  >
+                    <a
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      tabIndex={open ? undefined : -1}
+                      className={clsx(
+                        "block rounded-xl px-2 py-3 text-xl font-medium text-white",
+                        "transition-colors hover:bg-white/10",
+                      )}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </Container>
       </div>
     </>
