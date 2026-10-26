@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Wordmark } from "@/components/Wordmark";
@@ -34,6 +34,53 @@ const NAV_GROUPS = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [retracted, setRetracted] = useState(false);
+  const lastY = useRef(0);
+  const idle = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+
+  /*
+    On phones the bar pulls up out of the way on its own: it retracts when the
+    page is scrolled down, and again after a couple of seconds of stillness.
+    Scrolling up, returning to the top, opening the menu or focusing anything
+    inside it brings it straight back. Desktop never retracts.
+  */
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 768px)");
+
+    const settle = () => {
+      clearTimeout(idle.current);
+      idle.current = setTimeout(() => {
+        if (!wide.matches && window.scrollY > 80) setRetracted(true);
+      }, 2000);
+    };
+
+    const onScroll = () => {
+      if (wide.matches) {
+        setRetracted(false);
+        return;
+      }
+      const y = window.scrollY;
+      setRetracted(y > 80 && y > lastY.current);
+      lastY.current = y;
+      settle();
+    };
+
+    lastY.current = window.scrollY;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    wide.addEventListener("change", onScroll);
+    settle();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      wide.removeEventListener("change", onScroll);
+      clearTimeout(idle.current);
+    };
+  }, []);
+
+  // The menu cannot be open behind a retracted bar.
+  useEffect(() => {
+    if (open) setRetracted(false);
+  }, [open]);
 
   // Lock body scroll while the mobile sheet is open.
   useEffect(() => {
@@ -51,8 +98,14 @@ export function Navbar() {
   return (
     <>
       <header
+        onFocusCapture={() => setRetracted(false)}
         className={clsx(
           "sticky top-0 z-50 border-b transition-colors duration-300",
+          // Tailwind v4 drives these from the `translate` property, so that is
+          // what the transition has to watch.
+          "transition-[translate,background-color,border-color] duration-300 ease-(--ease-out-soft)",
+          "motion-reduce:transition-none",
+          retracted && !open ? "-translate-y-full md:translate-y-0" : "translate-y-0",
           // While the sheet is open the bar goes transparent and the sheet
           // runs behind it, so the two read as one unbroken dark surface.
           open
@@ -87,7 +140,7 @@ export function Navbar() {
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="whitespace-nowrap text-sm font-medium text-[#555555] transition-colors hover:text-white"
+                      className="whitespace-nowrap text-sm font-medium text-white transition-colors hover:text-white/70"
                     >
                       {link.label}
                     </a>
