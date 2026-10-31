@@ -13,10 +13,10 @@ const COLUMNS = [
   {
     heading: "Company",
     links: [
-      { label: "About", href: "#about" },
+      { label: "About", href: "/about" },
       { label: "Press", href: CONTACT_HREF },
       { label: "Careers", href: CONTACT_HREF },
-      { label: "Core Team", href: "#community" },
+      { label: "Core Team", href: "/our-team" },
     ],
     // Second group stacked under the first, as in the reference layout.
     subHeading: "Terms & Policies",
@@ -29,17 +29,17 @@ const COLUMNS = [
   {
     heading: "Services",
     links: [
-      { label: "Websites", href: "#services" },
-      { label: "Social Media", href: "#services" },
-      { label: "Branding", href: "#services" },
-      { label: "The App", href: "#features" },
+      { label: "Websites", href: "/services" },
+      { label: "Social Media", href: "/services" },
+      { label: "Branding", href: "/services" },
+      { label: "The App", href: "/services" },
     ],
   },
   {
     heading: "Learn",
     links: [
-      { label: "News", href: CONTACT_HREF },
-      { label: "Our Work", href: "#work" },
+      { label: "News", href: "/news" },
+      { label: "Our Work", href: "/projects" },
     ],
   },
 ];
@@ -57,7 +57,7 @@ export function Footer() {
   return (
     <footer className="border-t border-line bg-paper py-14 sm:py-20">
       <Container>
-        <a href="#top" className="inline-block text-3xl">
+        <a href="/" className="inline-block text-3xl">
           <Wordmark alt="Clickworks home" sizes="200px" />
         </a>
 
