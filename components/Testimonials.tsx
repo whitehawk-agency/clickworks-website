@@ -59,7 +59,7 @@ export function Testimonials() {
   return (
     <section id="community" className="scroll-mt-20 bg-paper-soft pb-10 pt-10 sm:py-24">
       <Container>
-        <h2 className="flex flex-wrap items-center justify-center gap-x-3 text-center text-3xl font-bold tracking-tight text-ink sm:text-4xl lg:text-5xl">
+        <h2 className="flex flex-wrap items-center justify-center gap-x-3 text-center text-3xl font-normal tracking-tight text-ink sm:text-4xl lg:text-5xl">
           Life with <Wordmark className="h-[0.8em]" />
         </h2>
 

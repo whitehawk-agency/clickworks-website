@@ -24,13 +24,12 @@
   --font-display: var(--font-sans);
 
   /*
-   * The whole site is set in Inter Display ExtraLight. The weight utilities
-   * stay in the markup so the intended hierarchy is still described, but
-   * every step resolves to 200 — raise these four values to bring the weight
-   * contrast back. The variable file already carries this cut, so no extra
-   * font is shipped for it.
+   * The site is set in Inter Display ExtraLight: medium, semibold and bold
+   * all resolve to 200. `font-normal` is the one step left at Regular, for
+   * the handful of places that should read at normal weight. The variable
+   * file carries both cuts, so no extra font is shipped for either.
    */
-  --font-weight-normal: 200;
+  --font-weight-normal: 400;
   --font-weight-medium: 200;
   --font-weight-semibold: 200;
   --font-weight-bold: 200;

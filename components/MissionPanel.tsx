@@ -93,7 +93,7 @@ export function MissionPanel() {
           />
 
           <div className="relative flex h-full flex-col items-center justify-center px-6 text-center sm:px-10">
-            <h2 className="max-w-[16ch] text-balance text-2xl font-semibold leading-[1.15] tracking-tight text-white sm:text-3xl lg:text-4xl">
+            <h2 className="max-w-[16ch] text-balance text-2xl font-normal leading-[1.15] tracking-tight text-white sm:text-3xl lg:text-4xl">
               Traditional marketing is broken &amp; failing us
             </h2>
             <p className="mt-4 max-w-[42ch] text-balance text-sm font-medium leading-snug text-white/55 sm:mt-6 sm:text-base">
@@ -102,7 +102,7 @@ export function MissionPanel() {
             </p>
             <a
               href={CONTACT_HREF}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.9375rem] font-semibold leading-5 tracking-tight text-ink shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:mt-8 sm:px-6 sm:py-3"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.9375rem] font-normal leading-5 tracking-tight text-ink shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:mt-8 sm:px-6 sm:py-3"
             >
               Our mission
               <ArrowUpRight className="size-4 shrink-0" strokeWidth={2.25} />

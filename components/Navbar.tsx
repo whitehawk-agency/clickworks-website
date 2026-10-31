@@ -166,7 +166,7 @@ export function Navbar() {
 
               <a
                 href={CONTACT_HREF}
-                className="hidden rounded-full bg-accent px-5 py-2 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-accent-strong md:inline-flex"
+                className="hidden rounded-full bg-accent px-5 py-2 text-sm font-normal text-white shadow-soft transition-colors hover:bg-accent-strong md:inline-flex"
               >
                 Get Started
               </a>
@@ -196,7 +196,7 @@ export function Navbar() {
               <a
                 href={CONTACT_HREF}
                 onClick={() => setOpen(false)}
-                className="motion-safe:animate-[nav-cta-in_300ms_var(--ease-out-soft)_both] absolute right-0 rounded-full bg-white px-5 py-2.5 text-sm font-semibold leading-5 text-ink shadow-soft transition-colors hover:bg-white/90 md:hidden"
+                className="motion-safe:animate-[nav-cta-in_300ms_var(--ease-out-soft)_both] absolute right-0 rounded-full bg-white px-5 py-2.5 text-sm font-normal leading-5 text-ink shadow-soft transition-colors hover:bg-white/90 md:hidden"
               >
                 Get Started
               </a>

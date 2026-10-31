@@ -23,7 +23,7 @@ export function AppDownloadBadge({
       )}
     >
       <AppleIcon className="size-[1.125rem] shrink-0 sm:size-6" />
-      <span className="text-[0.9375rem] leading-5 font-semibold tracking-tight sm:text-lg sm:leading-7">
+      <span className="text-[0.9375rem] leading-5 font-normal tracking-tight sm:text-lg sm:leading-7">
         Download on iOS
       </span>
     </a>
