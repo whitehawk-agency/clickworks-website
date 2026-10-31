@@ -39,12 +39,7 @@ export default function AboutPage() {
               Meet our Founder
             </h2>
             <p className="mt-4 text-base leading-relaxed text-ink sm:mt-5 sm:text-lg">
-              Samandeep Singh, who is a young Sikh entrepreneur who has been
-              within the field of marketing for 5+ years and has helped scale
-              20+ businesses within many industries from automotive to QSR. He
-              introduced Clickworks seeing the increase of AI being used for
-              marketing decreasing the value of key features in the industry
-              alongside
+              Samandeep Singh is a young Sikh entrepreneur who has worked in marketing for 5+ years and has helped scale 20+ businesses across industries from automotive to QSR. He founded Clickworks after seeing the growing use of AI in marketing erode the value of key skills in the industry.
             </p>
           </div>
         </div>
