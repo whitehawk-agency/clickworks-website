@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { Container } from "@/components/Container";
 import { Wordmark } from "@/components/Wordmark";
@@ -8,12 +10,12 @@ import { CONTACT_HREF } from "@/lib/links";
 import { clsx } from "@/lib/clsx";
 
 const NAV_LINKS = [
-  { label: "About Us", href: "#about" },
-  { label: "Features", href: "#features" },
-  { label: "Services", href: "#services" },
-  { label: "Our Work", href: "#work" },
-  { label: "Community", href: "#community" },
-  { label: "Sign Up", href: CONTACT_HREF },
+  { label: "About Us", href: "/about" },
+  { label: "Projects", href: "/projects" },
+  { label: "Services", href: "/services" },
+  { label: "Our Team", href: "/our-team" },
+  { label: "News", href: "/news" },
+  { label: "Community", href: "/community" },
 ];
 
 /** The phone sheet groups the same links under headings. */
@@ -21,18 +23,19 @@ const NAV_GROUPS = [
   {
     label: "Explore",
     links: NAV_LINKS.filter((l) =>
-      ["Features", "Services", "Our Work"].includes(l.label),
+      ["Projects", "Services", "News"].includes(l.label),
     ),
   },
   {
     label: "Company",
     links: NAV_LINKS.filter((l) =>
-      ["About Us", "Community", "Sign Up"].includes(l.label),
+      ["About Us", "Our Team", "Community"].includes(l.label),
     ),
   },
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [retracted, setRetracted] = useState(false);
   const lastY = useRef(0);
@@ -77,6 +80,11 @@ export function Navbar() {
     };
   }, []);
 
+  // A route change closes the sheet behind it.
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
   // The menu cannot be open behind a retracted bar.
   useEffect(() => {
     if (open) setRetracted(false);
@@ -120,8 +128,8 @@ export function Navbar() {
           >
             {/* Logo, links and the CTA all read as one group */}
             <div className="flex min-w-0 items-center gap-7">
-              <a
-                href="#top"
+              <Link
+                href="/"
                 className={clsx(
                   "shrink-0 text-2xl text-white md:text-xl",
                   open && "hidden md:block",
@@ -133,17 +141,25 @@ export function Navbar() {
                   priority
                   sizes="(max-width: 768px) 140px, 130px"
                 />
-              </a>
+              </Link>
 
               <ul className="hidden items-center gap-7 md:flex">
                 {NAV_LINKS.map((link) => (
                   <li key={link.label}>
-                    <a
+                    <Link
                       href={link.href}
-                      className="whitespace-nowrap text-sm font-medium text-white transition-colors hover:text-white/70"
+                      aria-current={
+                        pathname === link.href ? "page" : undefined
+                      }
+                      className={clsx(
+                        "whitespace-nowrap text-sm font-medium transition-colors",
+                        pathname === link.href
+                          ? "text-white underline decoration-white/40 underline-offset-8"
+                          : "text-white hover:text-white/70",
+                      )}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -240,17 +256,21 @@ export function Navbar() {
                         : "translate-y-3 opacity-0",
                     )}
                   >
-                    <a
+                    <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
                       tabIndex={open ? undefined : -1}
+                      aria-current={
+                        pathname === link.href ? "page" : undefined
+                      }
                       className={clsx(
-                        "block rounded-xl px-2 py-3 text-xl font-medium text-white",
+                        "block rounded-xl px-2 py-3 text-xl font-medium",
                         "transition-colors hover:bg-white/10",
+                        pathname === link.href ? "text-white" : "text-white/70",
                       )}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
