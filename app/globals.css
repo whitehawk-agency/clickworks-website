@@ -23,6 +23,18 @@
   --font-sans: var(--font-inter-display), "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-sans);
 
+  /*
+   * The whole site is set in Inter Display ExtraLight. The weight utilities
+   * stay in the markup so the intended hierarchy is still described, but
+   * every step resolves to 200 — raise these four values to bring the weight
+   * contrast back. The variable file already carries this cut, so no extra
+   * font is shipped for it.
+   */
+  --font-weight-normal: 200;
+  --font-weight-medium: 200;
+  --font-weight-semibold: 200;
+  --font-weight-bold: 200;
+
   /* Soft UI shadows for cards */
   --shadow-soft: 0 1px 2px rgba(9, 9, 11, 0.04),
     0 8px 24px -12px rgba(9, 9, 11, 0.12);
@@ -48,6 +60,8 @@
      * pick per size instead (Display when large, Text when small).
      */
     font-variation-settings: "opsz" 32;
+    /* ExtraLight for anything that carries no weight utility of its own. */
+    font-weight: 200;
   }
 
   /* Visible, consistent focus ring for keyboard users */
