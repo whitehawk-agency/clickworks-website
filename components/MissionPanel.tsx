@@ -104,7 +104,11 @@ export function MissionPanel() {
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.9375rem] font-semibold leading-5 tracking-tight text-ink shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:mt-8 sm:px-6 sm:py-3"
             >
               Our mission
-              <ArrowUpRight className="size-4 shrink-0" strokeWidth={2.25} />
+              <ArrowUpRight
+                aria-hidden="true"
+                className="size-4 shrink-0"
+                strokeWidth={2.25}
+              />
             </a>
           </div>
         </div>

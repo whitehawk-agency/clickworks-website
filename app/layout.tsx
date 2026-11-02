@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
+import { AccessibilityToolbar } from "@/components/AccessibilityToolbar";
 
 /**
  * Inter, self-hosted as a single variable file (SIL OFL — see
@@ -52,6 +53,7 @@ export default function RootLayout({
         <main id="main">{children}</main>
         <Footer />
         <CookieConsent />
+        <AccessibilityToolbar />
       </body>
     </html>
   );

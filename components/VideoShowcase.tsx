@@ -35,7 +35,10 @@ export function VideoShowcase({ src, label }: { src?: string; label?: string }) 
     >
       <span className="flex flex-col items-center gap-5">
         <span className="flex size-16 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 transition-colors group-hover:bg-white/20 sm:size-20">
-          <Play className="size-6 translate-x-0.5 fill-white text-white sm:size-7" />
+          <Play
+            aria-hidden="true"
+            className="size-6 translate-x-0.5 fill-white text-white sm:size-7"
+          />
         </span>
         <span className="text-xl font-medium tracking-tight text-white/90 sm:text-2xl">
           {label ?? "Insert Video"}

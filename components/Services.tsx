@@ -29,7 +29,11 @@ export function Services() {
           className="inline-flex items-center gap-2 rounded-full border border-[#f2f2f2] bg-paper px-4 py-2 text-sm font-normal text-[#545454] shadow-soft transition-colors hover:border-line sm:gap-3 sm:px-16 sm:py-3 sm:text-base"
         >
           Meet Core Team
-          <ArrowUpRight className="size-4 shrink-0 sm:size-5" strokeWidth={2} />
+          <ArrowUpRight
+            aria-hidden="true"
+            className="size-4 shrink-0 sm:size-5"
+            strokeWidth={2}
+          />
         </a>
       </Container>
     </section>

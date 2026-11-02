@@ -9,9 +9,14 @@
   --color-paper-soft: #f7f7f8;
   --color-line: #e8e8ec;
 
-  /* Single accent used for the primary CTA */
-  --color-accent: #1d7afc;
-  --color-accent-strong: #0a63e0;
+  /*
+   * Single accent used for the primary CTA. Darkened from #1d7afc, which
+   * only reached 4.0:1 against white label text and so failed WCAG AA for
+   * 14px type; this clears it at 5.4:1. The same token draws the focus ring,
+   * which gains contrast from the change too.
+   */
+  --color-accent: #0a63e0;
+  --color-accent-strong: #0750b8;
 
   /*
    * Inter Display, self-hosted as one variable file. The Display cut comes
@@ -48,6 +53,36 @@
      * pick per size instead (Display when large, Text when small).
      */
     font-variation-settings: "opsz" 32;
+  }
+
+  /*
+   * User accessibility preferences, set by the toolbar and persisted in
+   * localStorage. They are plain attributes on <html> so every rule below is
+   * pure CSS with no re-render.
+   */
+
+  /* Stronger muted text and borders, and underlines on every prose link. */
+  :root[data-a11y-contrast="high"] {
+    --color-ink-muted: #3f3f46;
+    --color-line: #a1a1aa;
+  }
+
+  :root[data-a11y-contrast="high"] main a:not([class*="rounded-full"]) {
+    text-decoration-line: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Honour a toolbar choice the same way the OS setting is honoured. */
+  :root[data-a11y-motion="reduced"] *,
+  :root[data-a11y-motion="reduced"] *::before,
+  :root[data-a11y-motion="reduced"] *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  :root[data-a11y-motion="reduced"] {
+    scroll-behavior: auto !important;
   }
 
   /* Visible, consistent focus ring for keyboard users */

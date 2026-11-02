@@ -41,7 +41,7 @@ export function PhotoSlot({
       }
     >
       {label && (
-        <span className="px-4 text-center text-xs font-medium uppercase tracking-[0.14em] text-ink-muted/70">
+        <span className="px-4 text-center text-xs font-medium uppercase tracking-[0.14em] text-ink-muted">
           {label}
         </span>
       )}
