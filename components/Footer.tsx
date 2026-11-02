@@ -1,29 +1,29 @@
 import { Instagram, Linkedin, Youtube } from "lucide-react";
 import { Container } from "@/components/Container";
-import { CONTACT_HREF } from "@/lib/links";
 import { Wordmark } from "@/components/Wordmark";
 import { TikTokIcon, XIcon } from "@/components/BrandIcons";
-
-/** Set this to show the "Founded & built in …" line; empty hides it. */
-const FOUNDED_IN = "";
-
-const SOCIAL_HANDLE = "@clickworks";
+import {
+  COMPANY,
+  HAS_LEGAL_DETAILS,
+  SOCIALS,
+  SOCIAL_HANDLE,
+  TRADING_NAME,
+} from "@/lib/company";
 
 const COLUMNS = [
   {
     heading: "Company",
     links: [
       { label: "About", href: "/about" },
-      { label: "Press", href: CONTACT_HREF },
-      { label: "Careers", href: CONTACT_HREF },
       { label: "Core Team", href: "/our-team" },
+      { label: "Contact", href: "/contact" },
     ],
     // Second group stacked under the first, as in the reference layout.
     subHeading: "Terms & Policies",
     subLinks: [
-      { label: "Terms of Service", href: CONTACT_HREF },
-      { label: "Privacy Policy", href: CONTACT_HREF },
-      { label: "Cookie Policy", href: CONTACT_HREF },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Cookie Policy", href: "/cookies" },
     ],
   },
   {
@@ -32,7 +32,6 @@ const COLUMNS = [
       { label: "Websites", href: "/services" },
       { label: "Social Media", href: "/services" },
       { label: "Branding", href: "/services" },
-      { label: "The App", href: "/services" },
     ],
   },
   {
@@ -44,16 +43,18 @@ const COLUMNS = [
   },
 ];
 
-// Point these at the real profile URLs.
-const SOCIALS = [
-  { label: "Instagram", href: CONTACT_HREF, Icon: Instagram },
-  { label: "TikTok", href: CONTACT_HREF, Icon: TikTokIcon },
-  { label: "X", href: CONTACT_HREF, Icon: XIcon },
-  { label: "LinkedIn", href: CONTACT_HREF, Icon: Linkedin },
-  { label: "YouTube", href: CONTACT_HREF, Icon: Youtube },
-];
+const SOCIAL_ICONS = {
+  Instagram,
+  TikTok: TikTokIcon,
+  X: XIcon,
+  LinkedIn: Linkedin,
+  YouTube: Youtube,
+} as const;
 
 export function Footer() {
+  // Only render profiles that actually have a destination.
+  const profiles = SOCIALS.filter((s) => s.href);
+
   return (
     <footer className="border-t border-line bg-paper py-14 sm:py-20">
       <Container>
@@ -103,27 +104,70 @@ export function Footer() {
           ))}
         </div>
 
+        {/*
+          Statutory business identification. Each line appears only once a real
+          value is set in lib/company.ts, so nothing invented is published; an
+          empty block means the details have not been supplied yet.
+        */}
+        {HAS_LEGAL_DETAILS && (
+          <div className="mt-14 border-t border-line pt-8 text-sm leading-relaxed text-ink-muted">
+            <h2 className="sr-only">Company details</h2>
+            {COMPANY.legalName && (
+              <p>
+                {COMPANY.legalName}
+                {COMPANY.registrationNumber && (
+                  <>
+                    {" "}
+                    &middot; Registered in England and Wales, company no.{" "}
+                    {COMPANY.registrationNumber}
+                  </>
+                )}
+                {COMPANY.vatNumber && <> &middot; VAT {COMPANY.vatNumber}</>}
+              </p>
+            )}
+            {COMPANY.registeredAddress && (
+              <address className="not-italic">
+                Registered office: {COMPANY.registeredAddress}
+              </address>
+            )}
+            {COMPANY.contactEmail && (
+              <p>
+                <a
+                  href={`mailto:${COMPANY.contactEmail}`}
+                  className="underline underline-offset-4 transition-colors hover:text-ink"
+                >
+                  {COMPANY.contactEmail}
+                </a>
+              </p>
+            )}
+          </div>
+        )}
+
         <div className="mt-16 flex flex-col items-center gap-6 text-center sm:mt-20 sm:flex-row sm:justify-between sm:text-left">
-          <p className="order-2 text-sm text-ink-muted sm:order-1 sm:flex-1">
-            {FOUNDED_IN ? `Founded & built in ${FOUNDED_IN}` : null}
-          </p>
+          <p className="order-2 text-sm text-ink-muted sm:order-1 sm:flex-1" />
 
           <p className="order-1 text-sm text-ink-muted sm:order-2">
-            © {new Date().getFullYear()} Clickworks. All rights reserved.
+            © {new Date().getFullYear()} {COMPANY.legalName || TRADING_NAME}.
+            All rights reserved.
           </p>
 
           <div className="order-3 flex items-center gap-4 sm:flex-1 sm:justify-end">
             <span className="text-sm text-ink-muted">{SOCIAL_HANDLE}</span>
-            {SOCIALS.map(({ label, href, Icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                className="text-ink-muted transition-colors hover:text-ink"
-              >
-                <Icon className="size-[18px]" />
-              </a>
-            ))}
+            {profiles.map(({ label, href }) => {
+              const Icon = SOCIAL_ICONS[label as keyof typeof SOCIAL_ICONS];
+              return (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${TRADING_NAME} on ${label} (opens in a new tab)`}
+                  className="text-ink-muted transition-colors hover:text-ink"
+                >
+                  <Icon className="size-[18px]" />
+                </a>
+              );
+            })}
           </div>
         </div>
       </Container>

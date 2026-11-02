@@ -7,7 +7,6 @@ import { Container } from "@/components/Container";
 import { Carousel } from "@/components/Carousel";
 import { Wordmark } from "@/components/Wordmark";
 import { GradientBall } from "@/components/GradientBall";
-import { CONTACT_HREF } from "@/lib/links";
 
 const PLATFORMS = {
   instagram: { icon: Instagram, name: "Instagram" },
@@ -79,7 +78,7 @@ export function Testimonials() {
       <Container>
         <div className="mt-4 flex justify-center sm:mt-12">
           <a
-            href={CONTACT_HREF}
+            href="/community"
             className="inline-flex items-center gap-2.5 rounded-full bg-black px-4 py-2 text-sm font-semibold text-white shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:gap-4 sm:py-3 sm:text-lg"
           >
             <GradientBall className="size-4 sm:size-6" />

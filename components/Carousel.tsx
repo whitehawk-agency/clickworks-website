@@ -133,6 +133,10 @@ export function Carousel({
           // The matching scroll-padding keeps every snap point on that same line.
           "px-[max(1.25rem,calc((100vw-72rem)/2))]",
           "scroll-pl-[max(1.25rem,calc((100vw-72rem)/2))]",
+          // Centre the cards when they fit. `safe` makes the browser fall back
+          // to start alignment once they overflow, so the first card can never
+          // end up scrolled off the left edge and out of reach.
+          "[justify-content:safe_center]",
         )}
       >
         {children}

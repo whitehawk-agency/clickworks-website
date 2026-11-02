@@ -18,6 +18,11 @@ export default function ServicesPage() {
       />
 
       <Container>
+        {/*
+          The tiles carry h3 headings. Without this the page would run h1
+          straight to h3, which screen-reader users navigate by.
+        */}
+        <h2 className="sr-only">The three disciplines</h2>
         <ServiceTiles />
       </Container>
 

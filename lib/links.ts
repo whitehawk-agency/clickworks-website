@@ -1,7 +1,5 @@
 /**
- * Where the "Get Started" / "Sign Up" / "Explore all stories" calls to action
- * point. The on-page contact form has been removed, so this is a placeholder
- * until there is a real destination — a contact page, a booking link, or a
- * mailto. Set it in one place here and every CTA follows.
+ * Where the primary call to action points. The on-page contact form was
+ * removed, so this is the contact page rather than an anchor to nowhere.
  */
-export const CONTACT_HREF = "#top";
+export const CONTACT_HREF = "/contact";

@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import { CONTACT_HREF } from "@/lib/links";
 
 /**
  * Cards scattered around the rim of the panel. `a` is the angle in degrees
@@ -101,7 +100,7 @@ export function MissionPanel() {
               continuous, personalised, and available 24/7.
             </p>
             <a
-              href={CONTACT_HREF}
+              href="/about"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-[0.9375rem] font-semibold leading-5 tracking-tight text-ink shadow-soft transition-transform duration-300 ease-(--ease-out-soft) hover:-translate-y-0.5 sm:mt-8 sm:px-6 sm:py-3"
             >
               Our mission

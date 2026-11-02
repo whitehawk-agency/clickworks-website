@@ -1,8 +1,6 @@
 import { Container } from "@/components/Container";
 import { VideoShowcase } from "@/components/VideoShowcase";
 import { Wordmark } from "@/components/Wordmark";
-import { AppDownloadBadge } from "@/components/AppDownloadBadge";
-import { PreOrderPill } from "@/components/PreOrderPill";
 
 export function Hero() {
   return (
@@ -26,10 +24,7 @@ export function Hero() {
             <Wordmark onDark priority />
           </h1>
 
-          <div className="mt-10 flex flex-col items-center gap-3 sm:mt-12 sm:gap-4">
-            <AppDownloadBadge onDark />
-            <PreOrderPill />
-          </div>
+
         </Container>
       </div>
 
@@ -43,9 +38,7 @@ export function Hero() {
           <VideoShowcase />
         </div>
 
-        <div className="mt-5 flex justify-center sm:mt-12">
-          <AppDownloadBadge />
-        </div>
+
       </Container>
     </section>
   );
