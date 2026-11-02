@@ -32,14 +32,21 @@ export const TRADING_NAME = "Clickworks";
  * missing link is better than one that goes nowhere.
  */
 export const SOCIALS = [
-  { label: "Instagram", href: "" },
-  { label: "TikTok", href: "" },
-  { label: "X", href: "" },
-  { label: "LinkedIn", href: "" },
-  { label: "YouTube", href: "" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/clickworksai",
+  },
+  { label: "TikTok", href: "https://www.tiktok.com/@clickworksai" },
+  { label: "X", href: "https://x.com/clickworksai" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/clickworks-it",
+  },
+  // No YouTube channel yet. Add an entry here when there is one and the icon
+  // appears; SOCIAL_ICONS in Footer.tsx already maps the label.
 ] as const;
 
-export const SOCIAL_HANDLE = "@clickworks";
+export const SOCIAL_HANDLE = "@clickworksai";
 
 /**
  * Flip to true only once something is actually set that needs consent —
