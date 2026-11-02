@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LegalPage, LegalSection } from "@/components/LegalPage";
+import { CookieSettingsButton } from "@/components/CookieSettingsButton";
 import { PRIVACY_CONTACT, TRACKING_ENABLED } from "@/lib/company";
 
 export const metadata: Metadata = {
@@ -16,8 +17,8 @@ export default function CookiesPage() {
       <LegalSection heading="What we set today">
         {TRACKING_ENABLED ? (
           <p>
-            We set cookies for the purposes listed below. Nothing other than
-            strictly necessary cookies is placed until you accept.
+            We set optional cookies for the purposes listed below, and nothing
+            beyond what is strictly necessary is placed until you accept.
           </p>
         ) : (
           <>
@@ -29,20 +30,27 @@ export default function CookiesPage() {
               that stores anything on your device.
             </p>
             <p>
-              Because nothing is stored, there is no consent banner to dismiss
-              and nothing for you to opt out of.
+              We still ask for your preference up front, so that if optional
+              analytics are introduced later your answer is already on record
+              and respected from the first page view. Your choice is kept in
+              your browser&rsquo;s local storage, not in a cookie, and never
+              leaves your device.
             </p>
           </>
         )}
       </LegalSection>
 
+      <LegalSection heading="Your choice">
+        <CookieSettingsButton />
+      </LegalSection>
+
       <LegalSection heading="If that changes">
         <p>
-          Before any non-essential cookie is introduced, a consent banner will
-          appear and nothing will be set until you choose. Strictly necessary
-          cookies — the kind required for the site to function — may be set
-          without consent, and this page will name each one, say what it does
-          and how long it lasts.
+          Before any non-essential cookie is introduced, nothing will be set
+          unless you have accepted. Strictly necessary cookies — the kind
+          required for the site to function — may be set without consent, and
+          this page will name each one, say what it does and how long it
+          lasts.
         </p>
       </LegalSection>
 
